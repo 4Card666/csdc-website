@@ -32,7 +32,7 @@ const drivers = [
   { name: "Heasly", "number": "223", "team": "Team Punksta", "car": "", "tag": "" },
   { name: "HenTaiMU", "number": "112", "team": "", "car": "", "tag": "" },
   { name: "HHW", "number": "502", "team": "Team ABN", "car": "", "tag": "" },
-  { name: "HPF", "number": "53", "team": "", "car": "Team VALITANT", "tag": "" },
+  { name: "HPF", "number": "53", "team": "Team VALITANT", "car": "", "tag": "" },
   { name: "Huan", "number": "115", "team": "", "car": "", "tag": "" },
   { name: "itz4Card", "number": "122", "team": "AnX Club", "car": "", "tag": "" },
   { name: "JerryZhu", "number": "187", "team": "", "car": "", "tag": "" },
@@ -99,21 +99,22 @@ const drivers = [
 ];
 
 const schedule = [
-  { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站", date: "2026.6.20", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
-  { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站", date: "2026.6.21", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
-  { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站", date: "2026.8.8", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
-  { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站", date: "2026.8.9", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
-  { round: "2026 ROUND 3", title: "浙江宁波四明山站", date: "2026.10.18", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
-  { round: "2026 ROUND 3", title: "浙江宁波四明山站", date: "2026.10.18", track: "赛道待公布", format: "追走赛", status: "即将开始", statusType: "upcoming" },
+  { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站排位赛", date: "2026.6.20", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站追走赛", date: "2026.6.21", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站排位赛", date: "2026.8.8", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站追走赛", date: "2026.8.9", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 3", title: "浙江宁波四明山站排位赛", date: "2026.10.18", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 3", title: "浙江宁波四明山站追走赛", date: "2026.10.18", track: "赛道待公布", format: "追走赛", status: "即将开始", statusType: "upcoming" },
   { round: "2026 ROUND 4", title: "？", date: "2026.？.？", track: "？", format: "排位赛", status: "待公布", statusType: "pending" },
   { round: "2026 ROUND 4", title: "？", date: "2026.？.？", track: "？", format: "追走赛", status: "待公布", statusType: "pending" },
 
   ];
 
 const news = [
-  { type: "公告", date: "2026-10-16", title: "CSDC 官网试运行", summary: "欢迎来到 CSDC 神力科莎虚拟漂移赛事官网。赛事规则、参赛车手与赛程信息将陆续更新，请关注后续公告。", pinned: true },
-  { type: "赛事动态", date: "待更新", title: "新赛季信息即将公布", summary: "赛事举办时间、赛道安排、参赛方式等信息确认后，将在本页面统一发布。", pinned: false },
-  { type: "社区", date: "待更新", title: "车手阵容持续更新中", summary: "车手名单目前为页面演示内容，正式阵容请以赛事主办方发布的信息为准。", pinned: false }
+  { type: "公告", date: "2026-10-16", title: "CSDC 官网内测中", summary: "欢迎来到CSDC神力科莎虚拟漂移赛事官网。赛事规则、参赛车手与赛程信息将陆续更新，请关注后续公告。网站当前仅在安心俱乐部内部群进行内测，请勿外传。", pinned: true },
+  { type: "赛事动态", date: "2026-10-18", title: "历届和应届赛事信息发布中", summary: "赛事举办时间、赛道安排、参赛方式等信息确认后，将在本页面统一发布。", pinned: false },
+  { type: "车手信息", date: "2026-10-18", title: "车手阵容持续更新中", summary: "车手名单持续更新中，有更新需求请联系V：L001AX或V：itz4Card。", pinned: false },
+  { type: "赞助商加盟", date: "2026-10-18", title: "赞助商加盟", summary: "CSDC诚招各路赞助商，有意向请联系V：L001AX", pinned: false }
 ];
 
 
