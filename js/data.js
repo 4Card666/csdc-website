@@ -99,10 +99,16 @@ const drivers = [
 ];
 
 const schedule = [
-  { round: "ROUND 01", title: "揭幕战（待公布）", date: "日期待定", track: "赛道待公布", format: "资格赛 / 正赛", status: "待公布", statusType: "pending" },
-  { round: "ROUND 02", title: "第二站（待公布）", date: "日期待定", track: "赛道待公布", format: "资格赛 / 正赛", status: "待公布", statusType: "pending" },
-  { round: "ROUND 03", title: "赛季决赛（待公布）", date: "日期待定", track: "赛道待公布", format: "淘汰赛 / 决赛", status: "待公布", statusType: "pending" }
-];
+  { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站", date: "2026.6.20", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站", date: "2026.6.21", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站", date: "2026.8.8", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站", date: "2026.8.9", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 3", title: "浙江宁波四明山站", date: "2026.10.18", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 3", title: "浙江宁波四明山站", date: "2026.10.18", track: "赛道待公布", format: "追走赛", status: "即将开始", statusType: "upcoming" },
+  { round: "2026 ROUND 4", title: "？", date: "2026.？.？", track: "？", format: "排位赛", status: "待公布", statusType: "pending" },
+  { round: "2026 ROUND 4", title: "？", date: "2026.？.？", track: "？", format: "追走赛", status: "待公布", statusType: "pending" },
+
+  ];
 
 const news = [
   { type: "公告", date: "2026-10-16", title: "CSDC 官网试运行", summary: "欢迎来到 CSDC 神力科莎虚拟漂移赛事官网。赛事规则、参赛车手与赛程信息将陆续更新，请关注后续公告。", pinned: true },
