@@ -148,3 +148,61 @@ code{font-size:11px;color:#ff9a93;background:#292022;padding:2px 5px;border-radi
  .sponsor-info h3{font-size:16px}
  .standings-table th,.standings-table td{padding:12px 13px}
 }
+/* 完整车手列表：改为横向条目，一行一位车手 */
+.drivers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drivers-list .driver-card {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.drivers-list .driver-visual {
+  height: auto;
+  min-height: 120px;
+}
+
+.drivers-list .driver-info {
+  padding: 20px 24px;
+  align-items: center;
+}
+
+.drivers-list .driver-info h3 {
+  font-size: 22px;
+}
+
+.drivers-list .driver-car {
+  font-size: 12px;
+}
+
+/* 手机端适配 */
+@media (max-width: 600px) {
+  .drivers-list .driver-card {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .drivers-list .driver-visual {
+    min-height: 105px;
+  }
+
+  .drivers-list .driver-number {
+    font-size: 90px;
+  }
+
+  .drivers-list .driver-info {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .drivers-list .driver-info h3 {
+    font-size: 16px;
+  }
+
+  .drivers-list .driver-car {
+    font-size: 10px;
+  }
+}
