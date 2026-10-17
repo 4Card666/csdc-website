@@ -5,7 +5,7 @@
 */
 
 const drivers = [
-[
+
   { "name": "33Chen #334", "number": "334", "team": "Team PunkSta", "car": "", "tag": "" },
   { "name": "7Xin #313", "number": "313", "team": "Team VALITANT", "car": "", "tag": "" },
   { "name": "Akarui #002", "number": "002", "team": "Team HCR", "car": "", "tag": "" },
