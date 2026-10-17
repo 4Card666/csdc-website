@@ -5,10 +5,10 @@
 */
 
 const drivers = [
-  { name: "Driver A", number: "07", team: "CSDC Racing", car: "Nissan Silvia S15", tag: "ROOKIE" },
-  { name: "Driver B", number: "21", team: "Independent", car: "Toyota AE86", tag: "DRIVER" },
-  { name: "Driver C", number: "36", team: "Night Shift", car: "BMW E36", tag: "DRIVER" },
-  { name: "Driver D", number: "88", team: "CSDC Racing", car: "Nissan 180SX", tag: "DRIVER" }
+  { name: "33Chen", number: "334", team: "Team PunkSta", car: "", tag: "" },
+  { name: "7Xin", number: "313", team: "Team VALITANT", car: "", tag: "" },
+  { name: "Akarui", number: "002", team: "Team HCR", car: "", tag: "" },
+  { name: "Ambr0se", number: "91", team: "No Team", car: "", tag: "" }
 ];
 
 const schedule = [
