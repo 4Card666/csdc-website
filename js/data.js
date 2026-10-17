@@ -128,6 +128,7 @@ const news = [
 */
 const sponsors = [
   // 示例格式：{ name: "赞助商名称", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
+  { name: "Simagic", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
 ];
 
 const standingsSeason = "2026 赛季";
