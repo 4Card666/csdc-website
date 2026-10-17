@@ -33,10 +33,27 @@ document.addEventListener("DOMContentLoaded", () => {
     </article>`;
 
   const homeDrivers = document.getElementById("home-drivers");
-  if (homeDrivers) {
-    homeDrivers.innerHTML = drivers.slice(0, 3).map(driverCard).join("");
-    document.getElementById("driver-count").textContent = `${drivers.length} 位车手`;
+
+if (homeDrivers) {
+  // 复制车手列表，避免打乱完整名单
+  const shuffledDrivers = [...drivers];
+
+  // Fisher-Yates 洗牌算法：随机打乱车手顺序
+  for (let i = shuffledDrivers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledDrivers[i], shuffledDrivers[j]] =
+      [shuffledDrivers[j], shuffledDrivers[i]];
   }
+
+  // 每次页面加载时随机展示 3 位车手
+  homeDrivers.innerHTML = shuffledDrivers
+    .slice(0, 3)
+    .map(driverCard)
+    .join("");
+
+  document.getElementById("driver-count").textContent =
+    `${drivers.length} 位车手`;
+}
 
   const allDrivers = document.getElementById("drivers-list");
   if (allDrivers) {
