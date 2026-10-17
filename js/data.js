@@ -83,7 +83,6 @@ const drivers = [
   { "name": "ZIPPERHUNTER #63", "number": "63", "team": "", "car": "", "tag": "" },
   { "name": "ZZC721drift #721", "number": "721", "team": "", "car": "", "tag": "" },
   { "name": "阿彬 #81", "number": "81", "team": "AnX Club", "car": "", "tag": "" },
-  { "name": "車痴星 #831", "number": "831", "team": "", "car": "", "tag": "" },
   { "name": "呆弟 #666", "number": "666", "team": "Team SMG", "car": "", "tag": "" },
   { "name": "沪上詹老师 #888", "number": "888", "team": "AnX Club", "car": "", "tag": "" },
   { "name": "姐夫哥 #777", "number": "777", "team": "", "car": "", "tag": "" },
