@@ -128,7 +128,15 @@ const news = [
 */
 const sponsors = [
   // 示例格式：{ name: "赞助商名称", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
-  { name: "Simagic", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
+  { name: "Simagic", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://simagic.com/", description: `我们是一群普普通通的年轻人，因追逐速度而躁动，因渴望胜利而呐喊。
+
+赛车运动为我们贴上标签，让普通的我们与众不同。然而，即便拥有天赋与热情这些已然无比奢侈的东西，我们的赛车梦却依然难以实现。赛车作为一项昂贵的体育运动，长久以来，仍是许多人可望而不可即的。秉承赛车运动“永不言弃”的精神内核，我们决心探索属于我们的另一个赛场-- 在那里，我们摆脱经济条件的限制，有效地练习赛车技巧，获得绝不打折的愉悦体验。
+
+“我们要如何抵达这个赛场，以最真实、最沉浸的方式实现我们的目标？”
+
+2018年，以此目标为指引，以热爱为燃料，速魔诞生了。SIMAGIC,速魔将会且一定会，重新定义模拟赛车的魔力。
+
+这是一场真实与虚拟的博弈。在这场博弈中，速魔要打造属于自己的引力场。` }
 ];
 
 const standingsSeason = "2026 赛季";
