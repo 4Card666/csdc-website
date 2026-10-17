@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSDC 赛事车手排名与积分榜">
+  <title>赛事排名与积分｜CSDC</title><link rel="stylesheet" href="css/style.css">
+  <script src="js/data.js" defer></script><script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">C</span><span>CSDC<small>ASSETTO CORSA DRIFT CHAMPIONSHIP</small></span></a>
+    <button class="menu-toggle" aria-label="打开导航菜单" aria-expanded="false">☰</button>
+    <nav class="nav"><a href="index.html">首页</a><a href="drivers.html">车手列表</a><a href="schedule.html">赛程安排</a><a class="active" href="standings.html">赛事积分</a><a href="sponsors.html">赞助商</a><a href="news.html">公告与新闻</a></nav>
+  </header>
+  <main>
+    <section class="page-hero"><p class="eyebrow">CHAMPIONSHIP STANDINGS</p><h1>赛事排名与<span>积分</span></h1><p>积分榜及各分站成绩以赛事官方核定结果为准。</p></section>
+    <section class="section page-section"><div class="section-heading"><div><p class="eyebrow">DRIVER STANDINGS</p><h2>车手积分榜</h2></div><span class="muted" id="standings-season"></span></div><div id="standings-table" class="table-wrap"></div><p class="notice">排名和分站积分可在 <code>js/data.js</code> 的 <code>standings</code> 数组中维护。请按主办方公布的规则录入成绩。</p></section>
+  </main>
+  <footer class="site-footer"><a class="footer-brand" href="index.html">CSDC<span> / </span></a><p>神力科莎虚拟漂移赛事 · 非官方社区赛事项目</p><span>© <span class="year"></span> CSDC</span></footer>
+</body>
+</html>
