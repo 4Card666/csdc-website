@@ -8,7 +8,7 @@ const drivers = [
 
   { "name": "33Chen #334", "number": "334", "team": "Team PunkSta", "car": "", "tag": "" },
   { "name": "7Xin #313", "number": "313", "team": "Team VALITANT", "car": "", "tag": "" },
-  { "name": "Akarui #002", "number": "002", "team": "Team HCR", "car": "", "tag": "" },
+  { "name": "Akarui #002", "number": "002", "team": "", "car": "", "tag": "" },
   { "name": "Ambr0se #91", "number": "91", "team": "", "car": "", "tag": "" },
   { "name": "Artoo #963", "number": "963", "team": "", "car": "", "tag": "" },
   { "name": "Aston #66", "number": "66", "team": "", "car": "", "tag": "" },
