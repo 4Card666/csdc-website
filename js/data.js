@@ -127,13 +127,13 @@ const news = [
 */
 const sponsors = [
   // 示例格式：{ name: "赞助商名称", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
-  { name: "SIMAGIC", level: "SIMAGIC速魔赛车模拟", logo: "assets/sponsors/name.png", url: "https://simagic.com/", description: "" },
-  { name: "飞驰十三赛车", level: "涿州市名驰赛扬体育发展有限公司", logo: "assets/sponsors/name.png", url: "", description: "" },
-  { name: "GT-Rally", level: "金盏赛车学校", logo: "assets/sponsors/name.png", url: "", description: "" },
-  { name: "Mori", level: "末日赛车模拟器", logo: "assets/sponsors/name.png", url: "", description: "" },
-  { name: "KEEP RACING", level: "KEEP RACING持续赛车模拟体验馆", logo: "assets/sponsors/name.png", url: "", description: "" },
-  { name: "XD RACING", level: "小杜赛车模拟器", logo: "assets/sponsors/name.png", url: "", description: "" },
-  { name: "ESDA", level: "Esports Drift Association", logo: "assets/sponsors/name.png", url: "", description: "" },
+  { name: "SIMAGIC", level: "SIMAGIC速魔赛车模拟", logo: "assets/sponsors/SIMAGIC.png", url: "https://simagic.com/", description: "" },
+  { name: "飞驰十三赛车", level: "涿州市名驰赛扬体育发展有限公司", logo: "assets/sponsors/FEICHI.png", url: "", description: "" },
+  { name: "GT-Rally", level: "金盏赛车学校", logo: "assets/sponsors/GT Rally.png", url: "", description: "" },
+  { name: "Mori", level: "末日赛车模拟器", logo: "assets/sponsors/Mori.png", url: "", description: "" },
+  { name: "KEEP RACING", level: "KEEP RACING持续赛车模拟体验馆", logo: "assets/sponsors/KEEP RACING.png", url: "", description: "" },
+  { name: "XD RACING", level: "小杜赛车模拟器", logo: "assets/sponsors/XD LODO.png", url: "", description: "" },
+  { name: "ESDA", level: "Esports Drift Association", logo: "assets/sponsors/ESDA.png", url: "", description: "" },
   
 ];
 
