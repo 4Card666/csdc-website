@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSDC 年度车手 TOP 10 荣誉榜，记录各赛季官方车手排名与年度积分。">
+  <title>年度车手 TOP 10 | CSDC</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .top10-intro { max-width: 760px; }
+    .top10-year-tabs { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0; }
+    .top10-year-tab { border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); color:inherit; border-radius:8px; padding:10px 18px; cursor:pointer; font:inherit; transition:.2s ease; }
+    .top10-year-tab:hover, .top10-year-tab[aria-pressed="true"] { background:#b91c1c; border-color:#b91c1c; color:#fff; }
+    .top10-status { display:inline-flex; align-items:center; gap:8px; padding:7px 11px; border-radius:999px; background:rgba(255,255,255,.07); color:inherit; font-size:.86rem; }
+    .top10-status::before { content:""; width:7px; height:7px; border-radius:50%; background:#d5a943; display:inline-block; }
+    .top10-status.is-final::before { background:#36b37e; }
+    .top10-podium { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:24px 0 30px; align-items:stretch; }
+    .top10-podium-card { border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:24px 16px; text-align:center; background:linear-gradient(155deg,rgba(255,255,255,.075),rgba(255,255,255,.025)); min-width:0; }
+    .top10-podium-card.first { border-color:rgba(218,177,67,.65); transform:translateY(-8px); }
+    .top10-rank-medal { display:inline-flex; width:42px; height:42px; align-items:center; justify-content:center; border-radius:50%; font-weight:800; margin-bottom:12px; background:rgba(255,255,255,.1); }
+    .first .top10-rank-medal { background:#d7ad45; color:#171717; }
+    .second .top10-rank-medal { background:#bfc5cc; color:#171717; }
+    .third .top10-rank-medal { background:#b9825c; color:#171717; }
+    .top10-driver-name { font-size:1.1rem; font-weight:750; overflow-wrap:anywhere; margin:5px 0 10px; }
+    .top10-points { font-size:1.25rem; font-weight:800; }
+    .top10-points-label { font-size:.8rem; opacity:.7; margin-top:3px; }
+    .top10-table-wrap { overflow-x:auto; border:1px solid rgba(255,255,255,.12); border-radius:12px; }
+    .top10-table { width:100%; border-collapse:collapse; min-width:360px; }
+    .top10-table th, .top10-table td { padding:15px 18px; text-align:left; border-bottom:1px solid rgba(255,255,255,.09); }
+    .top10-table th { background:rgba(255,255,255,.055); font-size:.84rem; opacity:.8; }
+    .top10-table tr:last-child td { border-bottom:0; }
+    .top10-table tbody tr:hover { background:rgba(255,255,255,.035); }
+    .top10-table .rank-cell { width:80px; font-weight:800; }
+    .top10-table .points-cell { text-align:right; font-variant-numeric:tabular-nums; font-weight:750; }
+    .top10-table th:last-child { text-align:right; }
+    .top10-empty { padding:30px 22px; border:1px dashed rgba(255,255,255,.22); border-radius:12px; margin:22px 0; }
+    .top10-empty h3 { margin-top:0; }
+    .top10-empty p { margin-bottom:0; opacity:.78; line-height:1.7; }
+    .top10-note { font-size:.88rem; opacity:.72; margin-top:14px; line-height:1.7; }
+    @media(max-width:640px) {
+      .top10-podium { gap:8px; }
+      .top10-podium-card { padding:17px 8px; }
+      .top10-podium-card.first { transform:none; }
+      .top10-rank-medal { width:34px; height:34px; }
+      .top10-driver-name { font-size:.95rem; }
+      .top10-points { font-size:1.05rem; }
+      .top10-year-tab { padding:9px 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="CSDC 首页">
+          <span class="brand-mark">C</span>
+          <span>CSDC</span>
+        </a>
+        <button class="menu-toggle" aria-label="打开导航菜单" aria-expanded="false" type="button">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" aria-label="主导航">
+          <a href="index.html">首页</a>
+          <a href="drivers.html">车手列表</a>
+          <a href="schedule.html">赛程安排</a>
+          <a href="standings.html">赛事积分</a>
+          <a href="top10.html" aria-current="page">年度车手 TOP 10</a>
+          <a href="sponsors.html">赞助商</a>
+          <a href="history.html">赛事历史</a>
+          <a href="organization.html">赛会介绍</a>
+          <a href="news.html">公告与新闻</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="top10-intro">
+          <p class="eyebrow">CSDC · DRIVER HONORS · EST. 2022</p>
+          <h1>年度车手 <span>TOP 10</span></h1>
+          <p>致敬每一位在赛道上留下成绩的车手。查看各赛季官方年度排名与总积分。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SEASON RANKING</p>
+            <h2 id="top10-section-title">2022 年度榜单</h2>
+          </div>
+          <span class="top10-status" id="top10-status">历史数据整理中</span>
+        </div>
+
+        <div class="top10-year-tabs" id="top10-year-tabs" role="group" aria-label="选择赛季">
+          <button class="top10-year-tab" type="button" data-year="2022" aria-pressed="true">2022</button>
+          <button class="top10-year-tab" type="button" data-year="2023" aria-pressed="false">2023</button>
+          <button class="top10-year-tab" type="button" data-year="2024" aria-pressed="false">2024</button>
+          <button class="top10-year-tab" type="button" data-year="2025" aria-pressed="false">2025</button>
+          <button class="top10-year-tab" type="button" data-year="2026" aria-pressed="false">2026</button>
+        </div>
+
+        <div id="top10-content" aria-live="polite">
+          <div class="top10-empty">
+            <h3>历史成绩整理中</h3>
+            <p>该年度的官方车手排名尚未录入。待核实官方成绩后，将在这里展示年度前三名荣誉卡片及完整 TOP 10 积分榜。</p>
+          </div>
+        </div>
+        <p class="top10-note">排名与积分以该年度官方最终成绩为准。尚未核实的数据不会显示为正式排名。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© CSDC · Community / Championship Website</p>
+    </div>
+  </footer>
+
+  <script src="js/top10-data.js"></script>
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll(".top10-year-tab"));
+      const title = document.getElementById("top10-section-title");
+      const status = document.getElementById("top10-status");
+      const content = document.getElementById("top10-content");
+      const allSeasons = Array.isArray(window.CSDCTop10Data) ? window.CSDCTop10Data : [];
+      const medalClasses = ["first", "second", "third"];
+
+      function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, function (char) {
+          return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];
+        });
+      }
+
+      function renderSeason(year) {
+        const season = allSeasons.find(item => String(item.year) === String(year));
+        title.textContent = year + " 年度榜单";
+        tabs.forEach(tab => tab.setAttribute("aria-pressed", tab.dataset.year === String(year) ? "true" : "false"));
+
+        if (!season || season.status !== "final" || !Array.isArray(season.drivers) || season.drivers.length === 0) {
+          status.textContent = Number(year) === 2026 ? "成绩待更新" : "历史数据整理中";
+          status.classList.remove("is-final");
+          content.innerHTML = '<div class="top10-empty"><h3>' +
+            (Number(year) === 2026 ? "本赛季成绩待更新" : "历史成绩整理中") +
+            '</h3><p>该年度的官方车手排名尚未录入。待核实官方成绩后，将在这里展示年度前三名荣誉卡片及完整 TOP 10 积分榜。</p></div>';
+          return;
+        }
+
+        const drivers = season.drivers.slice().sort((a, b) => Number(a.rank) - Number(b.rank)).slice(0, 10);
+        status.textContent = "官方最终排名";
+        status.classList.add("is-final");
+
+        const podium = drivers.filter(driver => Number(driver.rank) >= 1 && Number(driver.rank) <= 3)
+          .sort((a, b) => Number(a.rank) - Number(b.rank));
+        const podiumHTML = podium.length ? '<div class="top10-podium">' + podium.map(driver => {
+          const rank = Number(driver.rank);
+          const medalClass = medalClasses[rank - 1] || "";
+          return '<article class="top10-podium-card ' + medalClass + '">' +
+            '<div class="top10-rank-medal">' + rank + '</div>' +
+            '<div class="top10-driver-name">' + escapeHTML(driver.name || "待填写") + '</div>' +
+            '<div class="top10-points">' + escapeHTML(driver.points ?? "—") + '</div>' +
+            '<div class="top10-points-label">年度总积分</div></article>';
+        }).join("") + '</div>' : "";
+
+        const tableRows = drivers.map(driver =>
+          '<tr><td class="rank-cell">' + escapeHTML(driver.rank) + '</td>' +
+          '<td>' + escapeHTML(driver.name || "待填写") + '</td>' +
+          '<td class="points-cell">' + escapeHTML(driver.points ?? "—") + '</td></tr>'
+        ).join("");
+
+        content.innerHTML = podiumHTML +
+          '<div class="top10-table-wrap"><table class="top10-table">' +
+          '<thead><tr><th>名次</th><th>车手姓名</th><th>年度总积分</th></tr></thead>' +
+          '<tbody>' + tableRows + '</tbody></table></div>';
+      }
+
+      tabs.forEach(tab => tab.addEventListener("click", () => renderSeason(tab.dataset.year)));
+      renderSeason(2022);
+
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".nav");
+      if (menuToggle && nav) {
+        menuToggle.addEventListener("click", function () {
+          const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+          menuToggle.setAttribute("aria-expanded", String(!expanded));
+          nav.classList.toggle("active");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
