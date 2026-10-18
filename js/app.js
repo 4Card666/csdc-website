@@ -82,8 +82,32 @@ if (homeDrivers) {
       <div class="sponsor-logo-wrap">${item.logo ? `<img class="sponsor-logo" src="${escapeHTML(item.logo)}" alt="${escapeHTML(item.name)} Logo" loading="lazy">` : `<span class="sponsor-logo-placeholder">${escapeHTML((item.name || "CSDC").slice(0, 2))}</span>`}</div>
       <div class="sponsor-info"><span class="sponsor-level">${escapeHTML(item.level || "官方合作伙伴")}</span><h3>${escapeHTML(item.name)}</h3>${item.description ? `<p>${escapeHTML(item.description)}</p>` : ""}${item.url ? `<a class="text-link" href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer">访问品牌网站 ↗</a>` : ""}</div>
     </article>`;
-  const homeSponsors = document.getElementById("home-sponsors");
-  if (homeSponsors) homeSponsors.innerHTML = sponsors.length ? sponsors.slice(0, 4).map(sponsorCard).join("") : emptyState("合作伙伴即将公布", "正式赞助商资料确认后，将在这里展示。", "empty-state-wide");
+  
+const homeSponsors = document.getElementById("home-sponsors");
+
+if (homeSponsors) {
+  if (sponsors.length > 0) {
+    const shuffledSponsors = [...sponsors];
+
+    for (let i = shuffledSponsors.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledSponsors[i], shuffledSponsors[j]] =
+        [shuffledSponsors[j], shuffledSponsors[i]];
+    }
+
+    homeSponsors.innerHTML = shuffledSponsors
+      .slice(0, 4)
+      .map(sponsorCard)
+      .join("");
+  } else {
+    homeSponsors.innerHTML = emptyState(
+      "合作伙伴即将公布",
+      "正式赞助商资料确认后，将在这里展示。",
+      "empty-state-wide"
+    );
+  }
+}
+
   const allSponsors = document.getElementById("sponsors-list");
   if (allSponsors) {
     allSponsors.innerHTML = sponsors.length ? sponsors.map(sponsorCard).join("") : emptyState("合作伙伴即将公布", "请在 js/data.js 的 sponsors 数组中添加已确认的赞助商资料。", "empty-state-wide");
