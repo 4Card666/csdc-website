@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="了解CSDC赛会团队、裁判、导播及赛事工作人员。">
+  <title>赛会介绍｜CSDC</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .org-hero{position:relative;overflow:hidden}
+    .org-hero:after{content:"THE TEAM";position:absolute;right:-8px;bottom:-25px;color:rgba(255,255,255,.035);font-family:"Barlow Condensed",sans-serif;font-size:clamp(70px,15vw,180px);font-weight:900;line-height:1;pointer-events:none}
+    .org-hero .page-hero-inner{position:relative;z-index:1}
+    .org-content{max-width:var(--max);margin:0 auto;padding:54px 24px 80px}
+    .org-lead{max-width:780px;color:var(--muted);line-height:1.95;margin:12px 0 36px}
+    .org-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .org-card{position:relative;min-height:210px;padding:25px;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+    .org-card:after{content:attr(data-number);position:absolute;right:13px;top:2px;font-family:"Barlow Condensed",sans-serif;font-size:82px;line-height:1;font-weight:900;color:rgba(255,255,255,.035);pointer-events:none}
+    .org-icon{display:grid;place-items:center;width:42px;height:42px;margin-bottom:20px;border:1px solid rgba(232,58,50,.45);color:var(--accent);font-size:20px;font-weight:800}
+    .org-card h3{margin:0 0 9px;font-size:19px}
+    .org-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.85}
+    .org-role-label{display:inline-block;margin-top:18px;padding:5px 8px;border:1px solid var(--line);color:#a6a8ad;font-size:11px;letter-spacing:.04em}
+    .org-people{margin-top:48px}
+    .org-people-box{margin-top:18px;padding:24px;background:var(--panel);border:1px solid var(--line)}
+    .org-people-box h3{margin:0 0 8px;font-size:17px}
+    .org-people-box p{margin:0;color:var(--muted);line-height:1.9;font-size:14px}
+    .org-note{margin-top:18px;color:var(--muted);font-size:12px;line-height:1.8}
+    @media(max-width:650px){.org-content{padding:36px 20px 58px}.org-grid{grid-template-columns:1fr}.org-card{min-height:0;padding:21px}.org-card:after{font-size:70px}.org-people-box{padding:18px}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">C</span><span>CSDC<small>Community Simulated Drift Competition</small></span></a>
+    <button class="menu-toggle" aria-label="打开导航菜单" aria-expanded="false">☰</button>
+    <nav class="nav"><a href="index.html">首页</a><a href="drivers.html">车手列表</a><a href="schedule.html">赛程安排</a><a href="standings.html">赛事积分</a><a href="sponsors.html">赞助商</a><a href="news.html">公告与新闻</a><a href="history.html">赛事历史</a><a class="active" href="organization.html">赛会介绍</a></nav>
+  </header>
+  <main>
+    <section class="page-hero org-hero">
+      <div class="page-hero-inner">
+        <p class="eyebrow">CSDC · BEHIND THE EVENT</p>
+        <h1>赛会<span>介绍</span></h1>
+        <p>一场赛事的顺利呈现，离不开每一个岗位的协作与付出。</p>
+      </div>
+    </section>
+    <section class="org-content">
+      <div class="section-heading"><div><p class="eyebrow">THE PEOPLE BEHIND CSDC</p><h2>幕后团队</h2></div></div>
+      <p class="org-lead">从赛场规则的执行，到比赛画面的制作与播出，赛会团队共同保障赛事的公平性、流畅度与观赏体验。这里将介绍各个岗位的工作内容与团队成员。</p>
+      <div class="org-grid">
+        <article class="org-card" data-number="01"><div class="org-icon">判</div><h3>裁判团队</h3><p>负责比赛规则的执行、赛况判定及相关争议的处理，维护赛事秩序与公平竞争环境。</p><span class="org-role-label">STEWARDING · 裁判与判罚</span></article>
+        <article class="org-card" data-number="02"><div class="org-icon">导</div><h3>导播团队</h3><p>负责直播画面的选择与切换、赛事流程衔接和现场视听内容的呈现。</p><span class="org-role-label">BROADCAST · 画面与直播</span></article>
+        <article class="org-card" data-number="03"><div class="org-icon">播</div><h3>解说团队</h3><p>负责比赛讲解、赛况信息传达和观赛氛围营造，让观众更好地理解赛事进程。</p><span class="org-role-label">COMMENTARY · 解说与信息</span></article>
+        <article class="org-card" data-number="04"><div class="org-icon">技</div><h3>技术团队</h3><p>负责赛事所需的技术系统、设备及相关支持工作，保障比赛和直播流程稳定运行。</p><span class="org-role-label">TECHNICAL · 技术支持</span></article>
+        <article class="org-card" data-number="05"><div class="org-icon">赛</div><h3>赛事运营</h3><p>负责赛事组织协调、信息发布、流程安排及各团队之间的沟通协作。</p><span class="org-role-label">OPERATIONS · 组织与协调</span></article>
+        <article class="org-card" data-number="06"><div class="org-icon">＋</div><h3>其他工作人员</h3><p>根据 CSDC 的实际分工，可在这里补充计时、赛务、内容制作或其他岗位介绍。</p><span class="org-role-label">CREW · 赛事支持</span></article>
+      </div>
+      <section class="org-people">
+        <div class="section-heading"><div><p class="eyebrow">MEET THE CREW</p><h2>认识赛会成员</h2></div></div>
+        <div class="org-people-box"><h3>成员名单即将补充</h3><p>后续可以按岗位逐一添加成员姓名、职务和个人介绍。当前页面先展示岗位与职责；请根据 CSDC 实际存在的岗位调整内容，避免展示不准确的信息。</p></div>
+      </section>
+      <p class="org-note">说明：当前岗位与职责为页面初稿示例，正式发布前请按赛会真实组织架构核对、删减或补充。</p>
+    </section>
+  </main>
+  <footer class="site-footer"><a class="footer-brand" href="index.html">CSDC<span> / </span></a><p>神力科莎虚拟漂移赛事 · 非官方社区赛事项目</p><span>© 2022 CSDC</span></footer>
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
+    if (toggle && nav) toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  </script>
+</body>
+</html>
