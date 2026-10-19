@@ -113,8 +113,8 @@ const schedule = [
 
 const news = [
   { type: "公告", date: "2026-10-16", title: "CSDC 官网内测中", summary: "欢迎来到CSDC神力科莎虚拟漂移赛事官网。赛事规则、参赛车手与赛程信息将陆续更新，请关注后续公告。网站当前仅在安心俱乐部内部群进行内测，请勿外传。", pinned: true },
-  { type: "赞助商加盟", date: "2026-10-18", title: "赞助商加盟", summary: "CSDC诚招各路赞助商，有意向请联系V：L001AX", pinned: false },
-  { type: "车手信息", date: "2026-10-18", title: "车手阵容持续更新中", summary: "车手名单持续更新中，有更新需求请联系V：L001AX或V：itz4Card。", pinned: false },
+  { type: "赞助商加盟", date: "2026-10-18", title: "赞助商加盟", summary: "CSDC诚招各路赞助商，有意向请联系V：L001AX（安心）", pinned: false },
+  { type: "车手信息", date: "2026-10-18", title: "车手阵容持续更新中", summary: "车手名单持续更新中，有更新需求请联系V：L001AX（安心）或V：itz4Card（itz4Card）。", pinned: false },
   { type: "赛事动态", date: "2026-10-18", title: "赛事信息发布中", summary: "赛事举办时间、赛道安排等信息确认后，将在本页面统一发布。", pinned: false }
   
 ];
