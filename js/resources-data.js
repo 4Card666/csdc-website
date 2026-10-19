@@ -13,6 +13,7 @@ window.CSDCResources = [
     type: "track",
     tags: ["CSDC", "2026", "涿州"],
     description: "2026 赛季使用的涿州飞驰赛车公园资源。",
+    sizeMB: 213.6,
     featured: false,
     downloadUrl: "https://pan.baidu.com/s/1CLtKF3mcDXbIRMRWNVK_7g?pwd=tbuu",
   }
