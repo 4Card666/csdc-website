@@ -8,13 +8,25 @@
  * - rank：官方名次
  * - name：官方车手姓名
  * - points：年度总积分（数字）
- *
- * 注意：当前所有年份均为待整理状态，没有填入虚构的车手或积分。
  */
 window.CSDCTop10Data = [
-  { year: 2022, status: "pending", drivers: [] },
   { year: 2023, status: "pending", drivers: [] },
   { year: 2024, status: "pending", drivers: [] },
-  { year: 2025, status: "pending", drivers: [] },
+  {
+    year: 2025,
+    status: "final",
+    drivers: [
+      { rank: 1, name: "郁老师", points: 390 },
+      { rank: 2, name: "小漂", points: 360 },
+      { rank: 3, name: "abinya", points: 287 },
+      { rank: 4, name: "远门dsb", points: 283 },
+      { rank: 5, name: "WEYE", points: 282 },
+      { rank: 6, name: "McLaren", points: 278 },
+      { rank: 7, name: "Akarui", points: 228 },
+      { rank: 8, name: "QPY", points: 192 },
+      { rank: 9, name: "kings007", points: 185 },
+      { rank: 10, name: "Masatonomura", points: 183 },
+    ]
+  },
   { year: 2026, status: "pending", drivers: [] }
 ];
