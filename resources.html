@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSDC 官方资源下载中心，提供赛道、CSP、赛事文件及宣传媒体资源的说明与下载入口。">
+  <title>资源下载 | CSDC</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/resources-data.js" defer></script>
+  <script src="js/resources.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span>CSDC<small>Community Simulated Drift Competition</small></span></a>
+    <button class="menu-toggle" aria-label="打开导航菜单" aria-expanded="false">☰</button>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html">首页</a><a href="drivers.html">车手列表</a><a href="schedule.html">赛程安排</a><a class="active" href="resources.html" aria-current="page">资源下载</a><a href="standings.html">赛事积分</a><a href="sponsors.html">赞助商</a>
+      <a href="top10.html">年度车手 TOP 10</a><a href="news.html">公告与新闻</a><a href="history.html">赛事历史</a><a href="organization.html">赛会介绍</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">CSDC OFFICIAL RESOURCES</p>
+      <h1>资源<span>下载</span></h1>
+      <p>赛道资源、CSP 配置、赛事文件与宣传素材。请下载前仔细阅读版本要求和安装说明。</p>
+    </section>
+    <section class="section resource-section">
+      <div class="resource-tools">
+        <label class="resource-search" for="resource-search-input"><span aria-hidden="true">⌕</span><input id="resource-search-input" type="search" placeholder="搜索资源名称、赛道、版本或关键词……" autocomplete="off"></label>
+        <div class="resource-filters" role="group" aria-label="资源分类筛选">
+          <button class="resource-filter is-active" type="button" data-category="all" aria-pressed="true">全部资源</button>
+          <button class="resource-filter" type="button" data-category="game" aria-pressed="false">游戏资源</button>
+          <button class="resource-filter" type="button" data-category="rules" aria-pressed="false">赛事文件</button>
+          <button class="resource-filter" type="button" data-category="media" aria-pressed="false">宣传与媒体</button>
+        </div>
+        <div class="resource-subfilters" id="resource-subfilters" hidden>
+          <span>游戏资源类型：</span>
+          <button class="resource-chip is-active" type="button" data-type="all" aria-pressed="true">全部</button>
+          <button class="resource-chip" type="button" data-type="track" aria-pressed="false">赛道</button>
+          <button class="resource-chip" type="button" data-type="csp" aria-pressed="false">CSP</button>
+        </div>
+      </div>
+      <div class="resource-results-heading"><div><p class="eyebrow">RESOURCE LIBRARY</p><h2>资源列表</h2></div><span class="muted" id="resource-count">资源整理中</span></div>
+      <div id="resource-list" class="resource-grid" aria-live="polite"></div>
+      <div id="resource-empty" class="resource-empty"><span class="resource-empty-icon">↓</span><h3>资源正在整理中</h3><p>首批公开资源上线后，将在这里提供资源说明、版本信息、安装指南与网盘下载入口。</p></div>
+      <p class="resource-disclaimer">提示：大型资源由外部网盘托管，下载速度、提取码要求及分享有效期以网盘页面为准。车包不在本页面公开提供，请以官方车手群通知为准。</p>
+    </section>
+  </main>
+  <footer class="site-footer"><a class="footer-brand" href="index.html">CSDC<span> / </span></a><p>神力科莎虚拟漂移赛事 · 非官方社区赛事项目</p><span>© <span class="year"></span> CSDC</span></footer>
+</body>
+</html>

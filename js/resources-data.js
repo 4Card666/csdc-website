@@ -1,0 +1,27 @@
+/*
+ * CSDC 资源清单
+ * 新增资源时复制一条对象并填写真实信息。暂不提供车包下载。
+ * category: game（游戏资源） / rules（赛事文件） / media（宣传与媒体）
+ * type: track（赛道） / csp（CSP） / document（文件） / image（媒体）
+ * requirement: required（比赛必需） / optional（可选） / dependency（依赖资源）
+ */
+window.CSDCResources = [
+  // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
+  // {
+  //   id: "track-2026-example",
+  //   title: "赛道名称",
+  //   category: "game",
+  //   type: "track",
+  //   tags: ["AC", "2026赛季"],
+  //   description: "赛道用途与适用赛事简介。",
+  //   version: "1.0",
+  //   sizeMB: 350,
+  //   updatedAt: "2026-10-20",
+  //   featured: true,
+  //   requirement: "required",
+  //   downloadUrl: "https://网盘分享链接",
+  //   accessCode: "",
+  //   installGuide: "安装步骤与路径说明。",
+  //   notes: "游戏版本、CSP 版本或其他注意事项。"
+  // }
+];
