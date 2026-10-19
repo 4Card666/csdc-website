@@ -95,7 +95,7 @@
         </div>
 
         <div class="top10-year-tabs" id="top10-year-tabs" role="group" aria-label="选择赛季">
-          <button class="top10-year-tab" type="button" data-year="2024" aria-pressed="false">2024</button>
+          <button class="top10-year-tab" type="button" data-year="2024" aria-pressed="true">2024</button>
           <button class="top10-year-tab" type="button" data-year="2025" aria-pressed="false">2025</button>
           <button class="top10-year-tab" type="button" data-year="2026" aria-pressed="false">2026</button>
         </div>
@@ -181,7 +181,7 @@
       }
 
       tabs.forEach(tab => tab.addEventListener("click", () => renderSeason(tab.dataset.year)));
-      renderSeason(2022);
+      renderSeason(2024);
 
       const menuToggle = document.querySelector(".menu-toggle");
       const nav = document.querySelector(".nav");
