@@ -28,10 +28,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!Number.isFinite(mb) || mb < 0) return "大小待确认";
     return mb >= 1024 ? `${(mb / 1024).toFixed(2)} GB` : `${mb} MB`;
   };
+  
   const card = item => {
     const tags = Array.isArray(item.tags) ? item.tags : [];
-    const badges = [categoryLabel(item.category), typeLabel(item.type), requirementLabel(item.requirement), ...tags]
-      .filter(Boolean).map(tag => `<span class="resource-tag">${escapeHTML(tag)}</span>`).join("");
+
+    const tagList = tags.length
+  ? `<div class="resource-keywords">${tags.map(tag => `<span>${escapeHTML(tag)}</span>`).join("")}</div>`
+  : "";
+    
+    const badges = [
+  typeLabel(item.type),
+  categoryLabel(item.category),
+  requirementLabel(item.requirement)
+]
+  .filter(Boolean)
+  .map(tag => `<span class="resource-tag">${escapeHTML(tag)}</span>`)
+  .join("");
+    
     const detailParts = [];
     if (item.version) detailParts.push(`<span>版本：${escapeHTML(item.version)}</span>`);
     detailParts.push(`<span>大小：${escapeHTML(formatSize(item))}</span>`);
@@ -44,8 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
       : `<span class="resource-link-pending">下载链接待补充</span>`;
     return `<article class="resource-card ${item.featured ? "resource-featured" : ""}">
       <div class="resource-card-top"><div class="resource-tags">${badges}</div>${item.featured ? '<span class="resource-pinned">置顶</span>' : ""}</div>
+      
       <h3>${escapeHTML(item.title || "未命名资源")}</h3>
       <p class="resource-description">${escapeHTML(item.description || "暂无简介。")}</p>
+      ${tagList}
+      
       <div class="resource-meta">${detailParts.join("")}</div>
       ${install}${notes}${code}
       <div class="resource-card-footer">${download}</div>
