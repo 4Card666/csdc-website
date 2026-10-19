@@ -33,7 +33,7 @@ window.CSDCResources = [
     title: "CSDC 2026 S3 宁波四明山",
     category: "game",
     type: "track",
-    tags: ["CSDC", "2026", "宁波"，"四明山"],
+    tags: ["CSDC", "2026", "宁波","四明山"],
     description: "2026 赛季使用的四明山赛道资源。",
     sizeMB: 393,
     featured: false,
