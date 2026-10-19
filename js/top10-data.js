@@ -10,7 +10,6 @@
  * - points：年度总积分（数字）
  */
 window.CSDCTop10Data = [
-  { year: 2023, status: "pending", drivers: [] },
   { year: 2024, status: "pending", drivers: [] },
   {
     year: 2025,
