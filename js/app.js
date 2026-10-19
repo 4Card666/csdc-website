@@ -55,11 +55,37 @@ if (homeDrivers) {
     `${drivers.length} 位车手`;
 }
 
-  const allDrivers = document.getElementById("drivers-list");
-  if (allDrivers) {
-    allDrivers.innerHTML = drivers.map(driverCard).join("");
-    document.getElementById("drivers-total").textContent = `${drivers.length} 位车手`;
+
+const allDrivers = document.getElementById("drivers-list");
+
+if (allDrivers) {
+  // 中文按拼音排序，英文按字母排序，数字按数值排序
+  // sensitivity: "base" 表示忽略英文大小写
+  const driverCollator = new Intl.Collator("zh-CN-u-co-pinyin", {
+    numeric: true,
+    sensitivity: "base"
+  });
+
+  // 复制名单后排序，不改变原始 drivers 数组
+  const sortedDrivers = [...drivers].sort((a, b) => {
+    return driverCollator.compare(
+      String(a.name || "").trim(),
+      String(b.name || "").trim()
+    );
+  });
+
+  // 使用排序后的名单生成车手卡片
+  allDrivers.innerHTML = sortedDrivers
+    .map(driverCard)
+    .join("");
+
+  // 更新车手总数
+  const totalElement = document.getElementById("drivers-total");
+  if (totalElement) {
+    totalElement.textContent = `${drivers.length} 位车手`;
   }
+}
+
 
   const homeNews = document.getElementById("home-news");
   if (homeNews) homeNews.innerHTML = news.slice(0, 3).map(newsCard).join("");
