@@ -37,7 +37,7 @@ window.CSDCResources = [
     description: "2026 赛季使用的四明山赛道资源。",
     sizeMB: 393,
     featured: false,
-    downloadUrl: "https://pan.baidu.com/s/1nCdM33x-fRKfhPhcqxdYiA?pwd=g56p",
+    downloadUrl: "https://pan.baidu.com/s/1R0P0pfTqyIeAH8QOBCxqaA?pwd=s8p4",
   },
   // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
   // {
