@@ -7,21 +7,14 @@
  */
 window.CSDCResources = [
   {
-    id: "track-suzuka-2026",
-    title: "Suzuka 赛道",
+    id: "zhuozhoufeichisaichegongyuan-2026",
+    title: "CSDC 2026 S3 涿州飞驰赛车公园",
     category: "game",
     type: "track",
-    tags: ["AC", "2026赛季", "铃鹿"],
-    description: "2026 赛季使用的铃鹿赛道资源。",
-    version: "1.0",
-    sizeMB: 350,
-    updatedAt: "2026-10-20",
-    featured: true,
-    requirement: "required",
-    downloadUrl: "https://你的真实网盘分享链接",
-    accessCode: "",
-    installGuide: "下载并解压后，按照随附说明安装到 Assetto Corsa 对应目录。",
-    notes: "请确认游戏版本及相关依赖要求。"
+    tags: ["CSDC", "2026", "涿州"],
+    description: "2026 赛季使用的涿州飞驰赛车公园资源。",
+    featured: false,
+    downloadUrl: "https://pan.baidu.com/s/1CLtKF3mcDXbIRMRWNVK_7g?pwd=tbuu",
   }
   // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
   // {
