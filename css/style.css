@@ -206,3 +206,39 @@ code{font-size:11px;color:#ff9a93;background:#292022;padding:2px 5px;border-radi
     font-size: 10px;
   }
 }
+
+.resource-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.resource-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.resource-keywords span {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--surface, #f3f5f8);
+  color: var(--text-muted, #687386);
+  font-size: 12px;
+}
+
+.resource-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
