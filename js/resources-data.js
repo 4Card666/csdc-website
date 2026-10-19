@@ -39,6 +39,17 @@ window.CSDCResources = [
     featured: false,
     downloadUrl: "https://pan.baidu.com/s/1R0P0pfTqyIeAH8QOBCxqaA?pwd=s8p4",
   },
+  {
+    id: "csp-0211-preview1-full",
+    title: "CSP v0.2.11 Preview1 Full",
+    category: "game",
+    type: "csp",
+    tags: ["csp","0211"],
+    description: "CSP v0.2.11 Preview1 Full,比较全能的csp版本",
+    sizeMB: 125.83,
+    featured: false,
+    downloadUrl: "https://pan.baidu.com/s/1oCBp9G97lrrGJRN5QwxeLA?pwd=fc3t",
+  },
   // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
   // {
   //   id: "track-2026-example",
