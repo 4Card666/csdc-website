@@ -10,7 +10,20 @@
  * - points：年度总积分（数字）
  */
 window.CSDCTop10Data = [
-  { year: 2024, status: "pending", drivers: [] },
+  { year: 2024,
+    status: "final",
+    drivers: [
+      { rank: 1, name: "Akarui", points: 490 },
+      { rank: 2, name: "小漂", points: 310 },
+      { rank: 3, name: "WEYE", points: 267 },
+      { rank: 4, name: "kings007", points: 264 },
+      { rank: 5, name: "郁老师", points: 215 },
+      { rank: 6, name: "Vincent", points: 183 },
+      { rank: 7, name: "Anders.Q", points: 177 },
+      { rank: 8, name: "PETERL", points: 151 },
+      { rank: 9, name: "Panda", points: 148 },
+      { rank: 10, name: "远门dsb", points: 145 },
+    ] },
   {
     year: 2025,
     status: "final",
