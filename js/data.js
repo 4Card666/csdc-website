@@ -105,7 +105,7 @@ const schedule = [
   { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站排位赛", date: "2026.8.8", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
   { round: "2026 ROUND 2", title: "英国英格兰东米德兰兹北安普顿郡银石站追走赛", date: "2026.8.9", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
   { round: "2026 ROUND 3", title: "浙江宁波四明山站排位赛", date: "2026.10.18", track: "赛道待公布", format: "排位赛", status: "已结束", statusType: "finished" },
-  { round: "2026 ROUND 3", title: "浙江宁波四明山站追走赛", date: "2026.10.18", track: "赛道待公布", format: "追走赛", status: "即将开始", statusType: "upcoming" },
+  { round: "2026 ROUND 3", title: "浙江宁波四明山站追走赛", date: "2026.10.18", track: "赛道待公布", format: "追走赛", status: "已结束", statusType: "finished" },
   { round: "2026 ROUND 4", title: "？", date: "2026.？.？", track: "？", format: "排位赛", status: "待公布", statusType: "pending" },
   { round: "2026 ROUND 4", title: "？", date: "2026.？.？", track: "？", format: "追走赛", status: "待公布", statusType: "pending" },
 
