@@ -6,6 +6,23 @@
  * requirement: required（比赛必需） / optional（可选） / dependency（依赖资源）
  */
 window.CSDCResources = [
+  {
+    id: "track-suzuka-2026",
+    title: "Suzuka 赛道",
+    category: "game",
+    type: "track",
+    tags: ["AC", "2026赛季", "铃鹿"],
+    description: "2026 赛季使用的铃鹿赛道资源。",
+    version: "1.0",
+    sizeMB: 350,
+    updatedAt: "2026-10-20",
+    featured: true,
+    requirement: "required",
+    downloadUrl: "https://你的真实网盘分享链接",
+    accessCode: "",
+    installGuide: "下载并解压后，按照随附说明安装到 Assetto Corsa 对应目录。",
+    notes: "请确认游戏版本及相关依赖要求。"
+  }
   // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
   // {
   //   id: "track-2026-example",
