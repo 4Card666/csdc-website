@@ -16,7 +16,29 @@ window.CSDCResources = [
     sizeMB: 213.6,
     featured: false,
     downloadUrl: "https://pan.baidu.com/s/1CLtKF3mcDXbIRMRWNVK_7g?pwd=tbuu",
-  }
+  },
+  {
+    id: "silverstone-2026",
+    title: "CSDC 2026 S3 银石",
+    category: "game",
+    type: "track",
+    tags: ["CSDC", "2026", "银石"],
+    description: "2026 赛季使用的银石赛道资源。",
+    sizeMB: 377.1,
+    featured: false,
+    downloadUrl: "https://pan.baidu.com/s/1nCdM33x-fRKfhPhcqxdYiA?pwd=g56p",
+  },
+  {
+    id: "simingshan-2026",
+    title: "CSDC 2026 S3 宁波四明山",
+    category: "game",
+    type: "track",
+    tags: ["CSDC", "2026", "宁波"，"四明山"],
+    description: "2026 赛季使用的四明山赛道资源。",
+    sizeMB: 393,
+    featured: false,
+    downloadUrl: "https://pan.baidu.com/s/1nCdM33x-fRKfhPhcqxdYiA?pwd=g56p",
+  },
   // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
   // {
   //   id: "track-2026-example",
