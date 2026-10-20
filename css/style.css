@@ -240,5 +240,398 @@ code{font-size:11px;color:#ff9a93;background:#292022;padding:2px 5px;border-radi
   margin-top: 0;
   margin-bottom: 10px;
   line-height: 1.5;
+
+ 
+/* =========================================
+   CSDC 资源下载页面：布局与视觉优化
+   ========================================= */
+
+/* 搜索、分类整体区域 */
+.resource-section {
+  min-width: 0;
+}
+
+.resource-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  margin-bottom: 42px;
+}
+
+/* 搜索框外层 */
+.resource-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 58px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--muted);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.resource-search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232, 58, 50, 0.12);
+}
+
+.resource-search > span {
+  flex: 0 0 auto;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.resource-search input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  height: 54px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+
+.resource-search input::placeholder {
+  color: var(--muted);
+}
+
+/* 分类按钮 */
+.resource-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resource-filter,
+.resource-chip {
+  min-height: 42px;
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: #c6c8cc;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.resource-filter:hover,
+.resource-chip:hover {
+  border-color: var(--accent);
+  color: white;
+}
+
+.resource-filter.is-active,
+.resource-chip.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+}
+
+/* 游戏资源的类型筛选 */
+.resource-subfilters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: -8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.resource-subfilters[hidden] {
+  display: none !important;
+}
+
+/* 资源列表标题 */
+.resource-results-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.resource-results-heading .eyebrow {
+  margin-bottom: 7px;
+}
+
+.resource-results-heading h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+/* 核心修复：桌面端每行三个资源 */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+  width: 100%;
+}
+
+/* 每项资源独立卡片 */
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.14);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.resource-card:hover {
+  transform: translateY(-3px);
+  border-color: #55585d;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.resource-card.resource-featured {
+  border-top: 2px solid var(--accent);
+}
+
+/* 卡片顶部分类标签 */
+.resource-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.resource-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border: 1px solid #373940;
+  border-radius: 999px;
+  background: var(--panel2);
+  color: #c7c9ce;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.resource-pinned {
+  color: var(--accent2);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* 资源标题与简介 */
+.resource-card h3 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.resource-description {
+  margin: 0 0 18px;
+  color: #b2b4b9;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* 文件版本、大小、更新时间 */
+.resource-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 18px;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  background: var(--panel2);
+  color: #c4c6cb;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* 安装说明、注意事项、提取码 */
+.resource-detail {
+  margin-bottom: 14px;
+  color: #bfc1c6;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.resource-detail strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.resource-detail p {
+  margin: 0;
+}
+
+.resource-access-code {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 下载按钮固定在卡片底部 */
+.resource-card-footer {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.resource-download {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.resource-download:hover {
+  background: var(--accent2);
+}
+
+.resource-link-pending {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 没有搜索结果时的提示 */
+.resource-empty {
+  margin-top: 20px;
+  padding: 38px 20px;
+  border: 1px dashed #3a3c40;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.015);
+  text-align: center;
+  color: var(--muted);
+}
+
+.resource-empty[hidden] {
+  display: none !important;
+}
+
+.resource-empty h3 {
+  margin: 10px 0 6px;
+  color: var(--text);
+  font-size: 17px;
+}
+
+.resource-empty p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.resource-empty-icon {
+  color: var(--accent);
+  font-size: 28px;
+}
+
+.resource-disclaimer {
+  margin-top: 34px;
+  padding: 16px 18px;
+  border-left: 2px solid var(--accent);
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* 平板：每行两个 */
+@media (max-width: 1000px) {
+  .resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .resource-card {
+    padding: 20px;
+  }
+}
+
+/* 手机：每行一个 */
+@media (max-width: 640px) {
+  .resource-tools {
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .resource-search {
+    min-height: 50px;
+    padding: 0 13px;
+  }
+
+  .resource-search input {
+    height: 48px;
+    font-size: 13px;
+  }
+
+  .resource-filters {
+    gap: 8px;
+  }
+
+  .resource-filter,
+  .resource-chip {
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .resource-subfilters {
+    gap: 7px;
+    font-size: 12px;
+  }
+
+  .resource-results-heading h2 {
+    font-size: 24px;
+  }
+
+  .resource-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+  }
+
+  .resource-card {
+    padding: 19px;
+  }
+
+  .resource-card h3 {
+    font-size: 18px;
+  }
+
+  .resource-disclaimer {
+    padding: 13px;
+  }
+}
+
   overflow-wrap: anywhere;
 }
