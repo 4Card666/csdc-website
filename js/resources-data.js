@@ -128,9 +128,9 @@ window.CSDCResources = [
     downloadUrl: "https://pan.baidu.com/s/1H_3SBSFMO_jJWnsuavADPA?pwd=u5hp",
   },
     {
-    id: "2025-tracksdownload-backop",
+    id: "2025-tracksdownload-backup",
     title: "CSDC 2025 S2赛道下载链接备份",
-    category: "documents",
+    category: "track",
     type: "track",
     tags: ["CSDC", "2025", "赛道"],
     description: "2025 赛季全年赛道的下载链接备份。",
@@ -138,7 +138,17 @@ window.CSDCResources = [
     featured: false,
     downloadUrl: "https://pan.baidu.com/s/1PIZUd0tWXqBCtDd8u6uFGg?pwd=s51n",
   },
-    
+    {
+    id: "2023-2024-tracksdownload",
+    title: "CSDC 2023-2024 S1赛道合集",
+    category: "track",
+    type: "track",
+    tags: ["CSDC", "2023", "2024", "赛道"],
+    description: "2023-2024 赛季赛道的下载链接。",
+    sizeMB: 0.1,
+    featured: false,
+    downloadUrl: "https://pan.baidu.com/s/19xj20J67KQdDFFZ58GQZvg?pwd=7bb4",
+  }, 
 
   // 示例结构（请复制后填写真实内容，不要保留示例占位值）：
   // {
