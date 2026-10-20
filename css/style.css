@@ -226,6 +226,7 @@ code{font-size:11px;color:#ff9a93;background:#292022;padding:2px 5px;border-radi
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 12px;
+  margin-bottom: 18px;
 }
 
 .resource-keywords span {
