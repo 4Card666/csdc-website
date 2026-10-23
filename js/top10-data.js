@@ -42,9 +42,12 @@ window.CSDCTop10Data = [
       { rank: 7, name: "Akarui", points: 228 },
       { rank: 8, name: "QPY", points: 192 },
       { rank: 9, name: "kings007", points: 185 },
-      { rank: 10, name: "Masatonomura", points: 183
       
 {
+  rank: 10,
+  name: "Masatonomura",
+  points: 183,
+
   equipment: {
     // 1. 基座与方向盘
     wheel: {
@@ -129,8 +132,4 @@ window.CSDCTop10Data = [
     updatedAt: "2026-10-24"
   }
 },
-},
-    ]
-  },
-  { year: 2026, status: "pending", drivers: [] }
-];
+
