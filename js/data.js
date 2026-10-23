@@ -94,7 +94,7 @@ const drivers = [
   { "name": "童令 #92", "number": "92", "team": "上海车镇", "car": "", "tag": "" },
   { "name": "王志龙 #65", "number": "65", "team": "", "car": "", "tag": "" },
   { "name": "小漂 #929", "number": "929", "team": "AnX Club", "car": "", "tag": "" },
-  { "name": "远门 #3", "number": "3", "team": "上海车镇&AnX Club", "car": "", "tag": "" }
+  { "name": "远门 #3", "number": "3", "team": "上海车镇&AnX Club", "car": "", "tag": "" },
   { "name": "kings007 #007", "number": "007", "team": "", "car": "", "tag": "" }
  
   /*
