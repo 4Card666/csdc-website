@@ -24,15 +24,34 @@
     .top10-driver-name { font-size:1.1rem; font-weight:750; overflow-wrap:anywhere; margin:5px 0 10px; }
     .top10-points { font-size:1.25rem; font-weight:800; }
     .top10-points-label { font-size:.8rem; opacity:.7; margin-top:3px; }
-    .top10-table-wrap { overflow-x:auto; border:1px solid rgba(255,255,255,.12); border-radius:12px; }
-    .top10-table { width:100%; border-collapse:collapse; min-width:360px; }
-    .top10-table th, .top10-table td { padding:15px 18px; text-align:left; border-bottom:1px solid rgba(255,255,255,.09); }
-    .top10-table th { background:rgba(255,255,255,.055); font-size:.84rem; opacity:.8; }
-    .top10-table tr:last-child td { border-bottom:0; }
-    .top10-table tbody tr:hover { background:rgba(255,255,255,.035); }
-    .top10-table .rank-cell { width:80px; font-weight:800; }
-    .top10-table .points-cell { text-align:right; font-variant-numeric:tabular-nums; font-weight:750; }
-    .top10-table th:last-child { text-align:right; }
+    .top10-driver-list { display:grid; gap:12px; }
+    .top10-driver-card { border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; background:rgba(255,255,255,.025); }
+    .top10-driver-summary { display:grid; grid-template-columns:72px minmax(0,1fr) auto auto; align-items:center; gap:16px; padding:18px 20px; cursor:pointer; list-style:none; }
+    .top10-driver-summary::-webkit-details-marker { display:none; }
+    .top10-driver-summary::marker { content:""; }
+    .top10-driver-summary:hover { background:rgba(255,255,255,.035); }
+    .top10-driver-rank { font-size:1.25rem; font-weight:850; color:#f0f0f0; }
+    .top10-driver-summary-name { font-weight:750; overflow-wrap:anywhere; }
+    .top10-driver-summary-points { font-weight:800; font-variant-numeric:tabular-nums; text-align:right; }
+    .top10-driver-summary-points small { display:block; font-size:.75rem; opacity:.65; font-weight:500; }
+    .top10-expand-label { color:#e8a09b; font-size:.85rem; white-space:nowrap; }
+    .top10-expand-label::after { content:"＋"; margin-left:8px; }
+    .top10-driver-card[open] .top10-expand-label::after { content:"－"; }
+    .top10-equipment { border-top:1px solid rgba(255,255,255,.1); padding:22px; }
+    .top10-equipment-intro { margin:0 0 18px; color:rgba(255,255,255,.65); font-size:.9rem; line-height:1.7; }
+    .top10-equipment-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .top10-equipment-section { min-width:0; border:1px solid rgba(255,255,255,.1); border-radius:10px; padding:16px; background:rgba(0,0,0,.12); }
+    .top10-equipment-section h4 { margin:0 0 12px; font-size:1rem; }
+    .top10-equipment-fields { display:grid; grid-template-columns:minmax(82px,auto) minmax(0,1fr); gap:8px 12px; margin:0; font-size:.88rem; line-height:1.6; }
+    .top10-equipment-fields dt { color:rgba(255,255,255,.58); }
+    .top10-equipment-fields dd { margin:0; overflow-wrap:anywhere; }
+    .top10-equipment-description { margin:12px 0 0; color:rgba(255,255,255,.78); font-size:.88rem; line-height:1.7; white-space:pre-line; }
+    .top10-equipment-images { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:14px; }
+    .top10-equipment-image { margin:0; min-width:0; }
+    .top10-equipment-image img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:7px; border:1px solid rgba(255,255,255,.12); }
+    .top10-equipment-image figcaption { margin-top:6px; font-size:.78rem; color:rgba(255,255,255,.62); overflow-wrap:anywhere; }
+    .top10-equipment-empty { padding:14px; border:1px dashed rgba(255,255,255,.16); border-radius:8px; color:rgba(255,255,255,.62); font-size:.88rem; line-height:1.7; }
+    .top10-equipment-updated { margin-top:14px; font-size:.78rem; color:rgba(255,255,255,.48); }
     .top10-empty { padding:30px 22px; border:1px dashed rgba(255,255,255,.22); border-radius:12px; margin:22px 0; }
     .top10-empty h3 { margin-top:0; }
     .top10-empty p { margin-bottom:0; opacity:.78; line-height:1.7; }
@@ -45,6 +64,15 @@
       .top10-driver-name { font-size:.95rem; }
       .top10-points { font-size:1.05rem; }
       .top10-year-tab { padding:9px 13px; }
+      .top10-driver-summary { grid-template-columns:32px minmax(0,1fr) auto auto; gap:10px; padding:15px 12px; }
+      .top10-driver-rank { font-size:1.05rem; }
+      .top10-driver-summary-points { font-size:.9rem; }
+      .top10-expand-label { font-size:0; }
+      .top10-expand-label::after { font-size:1rem; margin-left:0; }
+      .top10-equipment { padding:14px; }
+      .top10-equipment-grid { grid-template-columns:1fr; }
+      .top10-equipment-images { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .top10-equipment-fields { grid-template-columns:85px minmax(0,1fr); }
     }
   </style>
 </head>
@@ -168,16 +196,73 @@
             '<div class="top10-points-label">年度总积分</div></article>';
         }).join("") + '</div>' : "";
 
-        const tableRows = drivers.map(driver =>
-          '<tr><td class="rank-cell">' + escapeHTML(driver.rank) + '</td>' +
-          '<td>' + escapeHTML(driver.name || "待填写") + '</td>' +
-          '<td class="points-cell">' + escapeHTML(driver.points ?? "—") + '</td></tr>'
-        ).join("");
+        function renderEquipmentSection(title, equipment, fields) {
+          const values = fields.map(field => {
+            const value = equipment && equipment[field.key];
+            if (value === undefined || value === null || String(value).trim() === "") return "";
+            return '<dt>' + escapeHTML(field.label) + '</dt><dd>' + escapeHTML(value) + '</dd>';
+          }).filter(Boolean);
+          const description = equipment && equipment.description
+            ? '<p class="top10-equipment-description">' + escapeHTML(equipment.description) + '</p>' : '';
+          const imageItems = equipment && Array.isArray(equipment.images) ? equipment.images : [];
+          const images = imageItems.map(image => {
+            if (!image || typeof image.src !== "string") return "";
+            const src = image.src.trim();
+            if (!src || /^(javascript|data):/i.test(src)) return "";
+            return '<figure class="top10-equipment-image"><img loading="lazy" src="' + escapeHTML(src) + '" alt="' + escapeHTML(image.alt || (title + '照片')) + '"><figcaption>' + escapeHTML(image.caption || title) + '</figcaption></figure>';
+          }).join("");
+          if (!values.length && !description && !images) return '';
+          return '<section class="top10-equipment-section"><h4>' + escapeHTML(title) + '</h4>' +
+            (values.length ? '<dl class="top10-equipment-fields">' + values.join('') + '</dl>' : '') +
+            description + (images ? '<div class="top10-equipment-images">' + images + '</div>' : '') + '</section>';
+        }
+
+        const equipmentCategories = [
+          { key: 'wheel', title: '基座与方向盘', fields: [
+            {key:'baseType',label:'基座类型'}, {key:'brand',label:'品牌'}, {key:'model',label:'型号'},
+            {key:'torque',label:'峰值扭矩'}, {key:'wheelModel',label:'方向盘型号'}
+          ]},
+          { key: 'pedals', title: '踏板', fields: [
+            {key:'brand',label:'品牌'}, {key:'model',label:'型号'}, {key:'type',label:'类型'},
+            {key:'loadCell',label:'负载传感器'}, {key:'clutch',label:'离合器配置'}
+          ]},
+          { key: 'shifterHandbrake', title: '排挡与手刹', fields: [
+            {key:'shifterBrand',label:'排挡品牌'}, {key:'shifterModel',label:'排挡型号'}, {key:'shifterType',label:'排挡类型'},
+            {key:'handbrakeBrand',label:'手刹品牌'}, {key:'handbrakeModel',label:'手刹型号'}, {key:'handbrakeType',label:'手刹类型'}
+          ]},
+          { key: 'pc', title: '电脑与显示设备', fields: [
+            {key:'gpu',label:'显卡'}, {key:'cpu',label:'处理器'}, {key:'memory',label:'内存'},
+            {key:'monitor',label:'显示器'}, {key:'displaySetup',label:'显示方案'}
+          ]},
+          { key: 'software', title: '游戏与软件设置', fields: [
+            {key:'game',label:'游戏'}, {key:'cmVersion',label:'CM 版本'}, {key:'cspVersion',label:'CSP 版本'},
+            {key:'wheelSoftware',label:'基座驱动'}, {key:'rotation',label:'转向角度'}, {key:'forceFeedback',label:'力反馈设置'}
+          ]}
+        ];
+
+        const driverCards = drivers.map(driver => {
+          const equipment = driver.equipment || {};
+          const sections = equipmentCategories.map(category =>
+            renderEquipmentSection(category.title, equipment[category.key], category.fields)
+          ).filter(Boolean).join('');
+          const otherSettings = equipment.otherSettings
+            ? '<section class="top10-equipment-section"><h4>其他设置与说明</h4><p class="top10-equipment-description">' + escapeHTML(equipment.otherSettings) + '</p></section>' : '';
+          const updated = equipment.updatedAt
+            ? '<p class="top10-equipment-updated">资料更新：' + escapeHTML(equipment.updatedAt) + '</p>' : '';
+          const detailContent = sections || otherSettings
+            ? '<div class="top10-equipment-grid">' + sections + otherSettings + '</div>' + updated
+            : '<div class="top10-equipment-empty">这位车手尚未提供设备或调校资料。资料补充后，将在这里展示基座、踏板、排挡与手刹、电脑配置，以及 CM / CSP 和游戏内设置。</div>';
+          return '<details class="top10-driver-card"><summary class="top10-driver-summary">' +
+            '<span class="top10-driver-rank">#' + escapeHTML(driver.rank) + '</span>' +
+            '<span class="top10-driver-summary-name">' + escapeHTML(driver.name || "待填写") + '</span>' +
+            '<span class="top10-driver-summary-points">' + escapeHTML(driver.points ?? "—") + '<small>年度积分</small></span>' +
+            '<span class="top10-expand-label">查看设备</span></summary>' +
+            '<div class="top10-equipment"><p class="top10-equipment-intro">车手设备与调校档案 · 以下内容以车手实际提交的信息为准。</p>' +
+            detailContent + '</div></details>';
+        }).join('');
 
         content.innerHTML = podiumHTML +
-          '<div class="top10-table-wrap"><table class="top10-table">' +
-          '<thead><tr><th>名次</th><th>车手姓名</th><th>年度总积分</th></tr></thead>' +
-          '<tbody>' + tableRows + '</tbody></table></div>';
+          '<div class="top10-driver-list" aria-label="年度 TOP 10 车手及设备档案">' + driverCards + '</div>';
       }
 
       tabs.forEach(tab => tab.addEventListener("click", () => renderSeason(tab.dataset.year)));
