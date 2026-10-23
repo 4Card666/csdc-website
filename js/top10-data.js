@@ -42,7 +42,94 @@ window.CSDCTop10Data = [
       { rank: 7, name: "Akarui", points: 228 },
       { rank: 8, name: "QPY", points: 192 },
       { rank: 9, name: "kings007", points: 185 },
-      { rank: 10, name: "Masatonomura", points: 183 },
+      { rank: 10, name: "Masatonomura", points: 183
+      
+{
+  equipment: {
+    // 1. 基座与方向盘
+    wheel: {
+      baseType: "直驱基座",
+      brand: "品牌名称",
+      model: "基座型号",
+      torque: "峰值扭矩",
+      wheelModel: "方向盘型号",
+      description: "基座及方向盘的补充说明",
+      images: [
+        {
+          src: "assets/equipment/yulaoshi/base.jpg",
+          alt: "方向盘基座照片",
+          caption: "基座实物"
+        }
+      ]
+    },
+
+    // 2. 踏板
+    pedals: {
+      brand: "踏板品牌",
+      model: "踏板型号",
+      type: "负载传感器踏板",
+      loadCell: "支持",
+      clutch: "带离合器",
+      description: "踏板及刹车设置说明",
+      images: [
+        {
+          src: "assets/equipment/yulaoshi/pedals.jpg",
+          alt: "踏板照片",
+          caption: "踏板实物"
+        }
+      ]
+    },
+
+    // 3. 排挡与手刹
+    shifterHandbrake: {
+      shifterBrand: "排挡品牌",
+      shifterModel: "排挡型号",
+      shifterType: "序列式",
+      handbrakeBrand: "手刹品牌",
+      handbrakeModel: "手刹型号",
+      handbrakeType: "模拟手刹"
+    },
+
+    // 4. 电脑与显示设备
+    pc: {
+      gpu: "显卡型号",
+      cpu: "处理器型号",
+      memory: "内存容量",
+      monitor: "显示器型号",
+      displaySetup: "单屏 / 三屏 / VR"
+    },
+
+    // 5. 游戏与软件设置
+    software: {
+      game: "Assetto Corsa",
+      cmVersion: "CM 版本",
+      cspVersion: "CSP 版本",
+      wheelSoftware: "基座驱动软件",
+      rotation: "转向角度",
+      forceFeedback: "力反馈设置",
+      description: "补充游戏内调校说明",
+      images: [
+        {
+          src: "assets/equipment/yulaoshi/cm-settings.jpg",
+          alt: "CM 设置截图",
+          caption: "CM 设置"
+        },
+        {
+          src: "assets/equipment/yulaoshi/ffb-settings.jpg",
+          alt: "力反馈设置截图",
+          caption: "力反馈设置"
+        }
+      ]
+    },
+
+    // 其他游戏设置、个人说明
+    otherSettings: "可以填写控制映射、画面设置或其他调校心得。",
+
+    // 资料更新时间
+    updatedAt: "2026-10-24"
+  }
+},
+},
     ]
   },
   { year: 2026, status: "pending", drivers: [] }
