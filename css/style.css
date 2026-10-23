@@ -635,29 +635,3 @@ code{font-size:11px;color:#ff9a93;background:#292022;padding:2px 5px;border-radi
     padding: 13px;
   }
  
-/* 固定显示在左上角的赛事报名文字 */
-.registration-label {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
-
-  color: #f0443e;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.5;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-/* 手机端位置微调 */
-@media (max-width: 600px) {
-  .registration-label {
-    top: 18px;
-    left: 14px;
-    font-size: 12px;
-  }
-}
-
-
- 
