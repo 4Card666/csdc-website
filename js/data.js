@@ -1,5 +1,4 @@
 /*
-  CSDC 网站资料文件
   修改车手、赛程、公告和新闻时，主要编辑这个文件即可。
   注意：保留引号、逗号和中括号等符号。
 */
@@ -96,7 +95,10 @@ const drivers = [
   { "name": "王志龙 #65", "number": "65", "team": "", "car": "", "tag": "" },
   { "name": "小漂 #929", "number": "929", "team": "AnX Club", "car": "", "tag": "" },
   { "name": "远门 #3", "number": "3", "team": "上海车镇&AnX Club", "car": "", "tag": "" }
-
+  /*
+  drivers格式如下
+  { "name": "？ #？", "number": "？", "team": "？", "car": "？", "tag": "？" },
+*/
 ];
 
 const schedule = [
@@ -111,25 +113,19 @@ const schedule = [
   /*
   格式：{ round: "？？？？ ROUND ？", title: "？", date: "？.？.？", track: "？", format: "？？赛", status: "？", statusType: "？" },
 */
-
   ];
 
 const news = [
-  { type: "公告", date: "2026-10-16", title: "CSDC 官网内测中", summary: "欢迎来到CSDC神力科莎虚拟漂移赛事官网。赛事规则、参赛车手与赛程信息将陆续更新，请关注后续公告。网站当前仅在安心俱乐部内部群进行内测，请勿外传。", pinned: true },
-  { type: "赞助商加盟", date: "2026-10-18", title: "赞助商加盟", summary: "CSDC诚招各路赞助商，有意向请联系V：L001AX（安心）", pinned: false },
-  { type: "车手信息", date: "2026-10-18", title: "车手阵容持续更新中", summary: "车手名单持续更新中，有更新需求请联系V：itz4Card（itz4Card）。", pinned: false },
+  { type: "公告", date: "2026-10-16", title: "CSDC 官网内测中", summary: "欢迎来到CSDC模拟漂移赛的官网。赛事规则、参赛车手与赛程信息将陆续更新，请关注后续公告。网站当前仅在安心俱乐部内部群进行内测，请勿外传网址。", pinned: true },
+  { type: "赞助相关", date: "2026-10-18", title: "赞助我们", summary: "CSDC诚招各路赞助商，同时也欢迎为爱发电的人士！有意向请联系V：L001AX（安心）", pinned: false },
+  { type: "车手信息", date: "2026-10-18", title: "车手阵容持续更新中", summary: "车手名单持续更新中，有更新或修改需求请联系V：itz4Card（itz4Card）。", pinned: false },
   { type: "赛事动态", date: "2026-10-18", title: "赛事信息发布中", summary: "赛事举办时间、赛道安排等信息确认后，将在赛程安排页面统一发布。", pinned: false }
+  /*
+  格式：{ type: "？", date: "？", title: "？", summary: "？", pinned: true/false }
+  true为置顶，false为不置顶，可同时置顶多个公告
+  */
   
-];
-
-
-/*
-  以下是本次新增模块的数据。
-  请把示例对象替换为主办方确认的真实信息；暂时没有确认的内容可以保留为空数组。
-  Logo 建议放进 assets/sponsors/ 文件夹，并填写相对路径，例如："assets/sponsors/brand-name.png"。
-*/
 const sponsors = [
-  // 示例格式：{ name: "赞助商名称", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
   { name: "SIMAGIC", level: "SIMAGIC速魔赛车模拟", logo: "assets/sponsors/SIMAGIC.png", url: "https://simagic.com/", description: "" },
   { name: "涿州飞驰赛车公园", level: "涿州市名驰赛扬体育发展有限公司", logo: "assets/sponsors/FEICHI.png", url: "", description: "" },
   { name: "Mori", level: "末日赛车模拟器", logo: "assets/sponsors/Mori.png", url: "", description: "" },
@@ -137,7 +133,10 @@ const sponsors = [
   { name: "XD RACING", level: "小杜赛车模拟器", logo: "assets/sponsors/XD LODO.png", url: "", description: "" },
   { name: "GT-Rally", level: "金盏赛车学校", logo: "assets/sponsors/GT Rally.png", url: "", description: "" },
   { name: "ESDA", level: "Esports Drift Association", logo: "assets/sponsors/ESDA.png", url: "", description: "" },
-  
+  /*
+  示例格式：{ name: "赞助商名称", level: "冠名赞助商", logo: "assets/sponsors/name.png", url: "https://example.com", description: "品牌简介" }
+  Logo 建议放进 assets/sponsors/ 文件夹，并填写相对路径，例如："assets/sponsors/brand-name.png"。
+*/
 ];
 
 const standingsSeason = "2026 赛季";
