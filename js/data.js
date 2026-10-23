@@ -95,7 +95,7 @@ const drivers = [
   { "name": "王志龙 #65", "number": "65", "team": "", "car": "", "tag": "" },
   { "name": "小漂 #929", "number": "929", "team": "AnX Club", "car": "", "tag": "" },
   { "name": "远门 #3", "number": "3", "team": "上海车镇&AnX Club", "car": "", "tag": "" },
-  { "name": "kings007 #007", "number": "007", "team": "", "car": "", "tag": "" }
+  { "name": "kings007 #007", "number": "007", "team": "", "car": "", "tag": "" },
  
   /*
   drivers格式如下
@@ -126,6 +126,7 @@ const news = [
   格式：{ type: "？", date: "？", title: "？", summary: "？", pinned: true/false }
   true为置顶，false为不置顶，可同时置顶多个公告
   */
+  ];
   
 const sponsors = [
   { name: "SIMAGIC", level: "SIMAGIC速魔赛车模拟", logo: "assets/sponsors/SIMAGIC.png", url: "https://simagic.com/", description: "" },
