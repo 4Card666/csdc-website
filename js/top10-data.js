@@ -67,8 +67,6 @@ window.CSDCTop10Data = [
             brand: "踏板品牌",
             model: "踏板型号",
             type: "负载传感器踏板",
-            loadCell: "支持",
-            clutch: "带离合器",
             description: "踏板及刹车设置说明",
             images: [
               {
