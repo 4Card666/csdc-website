@@ -634,5 +634,42 @@ code{font-size:11px;color:#ff9a93;background:#292022;padding:2px 5px;border-radi
   .resource-disclaimer {
     padding: 13px;
   }
+
+ /* 固定在页面左上角的赛事报名入口 */
+.registration-link {
+  position: fixed;
+  top: 28px;
+  left: 28px;
+  z-index: 1000;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #f0443e;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color 0.2s ease;
+}
+
+.registration-link:hover {
+  color: #ff7771;
+}
+
+.registration-link span {
+  font-size: 16px;
+}
+
+/* 手机屏幕调整位置 */
+@media (max-width: 600px) {
+  .registration-link {
+    top: 18px;
+    left: 14px;
+    font-size: 12px;
+  }
+}
 }
 
