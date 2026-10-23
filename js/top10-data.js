@@ -8,6 +8,11 @@
  * - rank：官方名次
  * - name：官方车手姓名
  * - points：年度总积分（数字）
+ * - equipment：可选的车手设备档案，写在对应车手对象中；不填则显示“尚未提供”提示。
+ *   可包含 wheel（基座/方向盘）、pedals（踏板）、shifterHandbrake（排挡/手刹）、
+ *   pc（电脑/显示设备）、software（游戏/CM/CSP 设置）、otherSettings（其他说明）、updatedAt。
+ *   各分类支持 brand、model、type 等对应字段，以及 description 和 images。
+ *   图片格式示例：images: [{ src: "assets/equipment/车手ID/base.jpg", alt: "基座照片", caption: "基座" }]
  */
 window.CSDCTop10Data = [
   { year: 2024,
