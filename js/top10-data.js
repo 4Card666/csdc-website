@@ -13,7 +13,7 @@
  *   pc（电脑/显示设备）、software（游戏/CM/CSP 设置）、otherSettings（其他说明）、updatedAt。
  *   各分类支持 brand、model、type 等对应字段，以及 description 和 images。
  *   图片格式示例：images: [{ src: "assets/equipment/车手ID/base.jpg", alt: "基座照片", caption: "基座" }]
- *   设备替换示例
+ *   替换示例
       {
         rank: a,
         name: "b",
@@ -91,7 +91,7 @@
       }
     ]
   },
-
+ *   以上内容均可删减
  */
 window.CSDCTop10Data = [
   { year: 2024,
