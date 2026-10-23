@@ -116,8 +116,9 @@ window.CSDCTop10Data = [
           },
           otherSettings: "其他游戏设置或调校心得。",
           updatedAt: "2026-10-24"
-        }
+          }
       }
     ]
-  },
+  }
+];
 
