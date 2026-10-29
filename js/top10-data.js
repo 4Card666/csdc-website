@@ -130,7 +130,7 @@ window.CSDCTop10Data = [
             description: "暂无说明",
             images: [
               {
-                src: "assets/equipment/masatonomura/base.jpg",
+                src: "assets/equipment/yuanmen/base.jpg",
                 alt: "方向盘基座照片",
                 caption: "基座实物"
               }
@@ -140,7 +140,7 @@ window.CSDCTop10Data = [
             model: "Moza CRP",
             images: [
               {
-                src: "assets/equipment/masatonomura/pedals.jpg",
+                src: "assets/equipment/yuanmen/pedals.jpg",
                 alt: "踏板照片",
                 caption: "踏板实物"
               }
@@ -148,7 +148,7 @@ window.CSDCTop10Data = [
           },
           shifterHandbrake: {
             shifterModel: "末日XSP序列档 & 莱仕达PXN-A7",
-            handbrakeModel: "末日XSP手刹",
+            handbrakeModel: "末日XSP手刹"
           },
           pc: {
             gpu: "5070ti",
@@ -163,12 +163,12 @@ window.CSDCTop10Data = [
             description: "暂无其他说明",
             images: [
               {
-                src: "assets/equipment/masatonomura/cm-settings.jpg",
+                src: "assets/equipment/yuanmen/cm-settings.jpg",
                 alt: "CM 设置截图",
                 caption: "CM 设置"
               },
               {
-                src: "assets/equipment/masatonomura/ffb-settings.jpg",
+                src: "assets/equipment/yuanmen/ffb-settings.jpg",
                 alt: "力反馈设置截图",
                 caption: "力反馈设置"
               }
