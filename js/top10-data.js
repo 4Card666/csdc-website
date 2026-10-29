@@ -177,8 +177,6 @@ window.CSDCTop10Data = [
           otherSettings: "其他游戏设置或调校心得。",
           updatedAt: "2026-10-24"
         }
-      }
-    ]
   },
       { rank: 5, name: "WEYE", points: 282 },
       { rank: 6, name: "McLaren", points: 278 },
