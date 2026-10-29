@@ -117,7 +117,69 @@ window.CSDCTop10Data = [
       { rank: 1, name: "郁老师", points: 390 },
       { rank: 2, name: "小漂", points: 360 },
       { rank: 3, name: "abinya", points: 287 },
-      { rank: 4, name: "远门dsb", points: 283 },
+      {
+        rank: 4,
+        name: "远门dsb",
+        points: 283,
+        equipment: {
+          wheel: {
+            baseType: "直驱基座",
+            model: "SIMAGIC EVO PRO",
+            torque: "18NM",
+            wheelModel: "MOMO 14寸 蒙特卡洛正品",
+            description: "暂无说明",
+            images: [
+              {
+                src: "assets/equipment/masatonomura/base.jpg",
+                alt: "方向盘基座照片",
+                caption: "基座实物"
+              }
+            ]
+          },
+          pedals: {
+            model: "Moza CRP",
+            images: [
+              {
+                src: "assets/equipment/masatonomura/pedals.jpg",
+                alt: "踏板照片",
+                caption: "踏板实物"
+              }
+            ]
+          },
+          shifterHandbrake: {
+            shifterModel: "末日XSP序列档 & 莱仕达PXN-A7",
+            handbrakeModel: "末日XSP手刹",
+          },
+          pc: {
+            gpu: "5070ti",
+            cpu: "7800x3d",
+            memory: "40G 6000MHZ",
+            monitor: "卓威 XL2566X+",
+            displaySetup: "单屏车顶随动"
+          },
+          software: {
+            cspVersion: "CSP v0.2.11 Preview1 Full",
+            rotation: "950度",
+            description: "暂无其他说明",
+            images: [
+              {
+                src: "assets/equipment/masatonomura/cm-settings.jpg",
+                alt: "CM 设置截图",
+                caption: "CM 设置"
+              },
+              {
+                src: "assets/equipment/masatonomura/ffb-settings.jpg",
+                alt: "力反馈设置截图",
+                caption: "力反馈设置"
+              }
+            ]
+          },
+          otherSettings: "其他游戏设置或调校心得。",
+          updatedAt: "2026-10-24"
+        }
+      }
+    ]
+  },
       { rank: 5, name: "WEYE", points: 282 },
       { rank: 6, name: "McLaren", points: 278 },
       { rank: 7, name: "Akarui", points: 228 },
