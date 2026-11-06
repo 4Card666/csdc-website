@@ -75,6 +75,10 @@
       .top10-equipment-fields { grid-template-columns:85px minmax(0,1fr); }
     }
   </style>
+  <link rel="stylesheet" href="css/auth.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.js" defer></script>
+  <script src="js/supabase-config.js" defer></script>
+  <script src="js/auth.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -97,6 +101,7 @@
           <a href="organization.html">赛会介绍</a>
           <a href="news.html">公告与新闻</a>
         </nav>
+        <a class="auth-nav-link" data-auth-nav href="login.html">登录 / 注册</a>
       </div>
     </div>
   </header>

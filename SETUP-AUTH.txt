@@ -1,0 +1,12 @@
+CSDC 用户系统第一阶段安装说明
+
+1. 在 js/supabase-config.js 填写新加坡项目的 Project URL 和 Publishable Key（不是 service_role）。
+2. Supabase Authentication > URL Configuration：Site URL = https://csdc.website；允许 https://csdc.website/**。
+3. 确认 Email provider 和 Confirm email 已开启，Custom SMTP 已完成配置。
+4. 将本 ZIP 中网站根目录的所有文件上传/合并到 GitHub 仓库根目录，保留原 .github 工作流。
+5. 测试 register.html 注册、邮箱确认、login.html 登录、account.html 待审核状态。
+
+注意：目前只提供注册/登录/状态展示；管理员审核功能尚未开发。
+当前数据库 profiles 表没有开放用户写入权限，管理员后续需通过安全的后端接口审核。
+若注册时提示 Database error saving new user，需检查触发器和用户名唯一性约束。
+目前没有忘记密码功能，建议先用专用测试邮箱，正式上线前补充找回密码和防滥用保护。
