@@ -3,3 +3,5 @@
 .season-table-wrap{width:100%;overflow-x:auto;margin:16px 0;border:1px solid #393b40}.season-table{width:100%;border-collapse:collapse;min-width:860px;background:#17191d;font-size:13px}.season-table th,.season-table td{padding:12px;border-bottom:1px solid #34363b;text-align:left;white-space:nowrap}.season-table th{background:#24262b;color:#fff}.season-table td{color:#c4c7cd}.season-table .admin-btn{margin-right:6px}.season-toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.season-toolbar input,.season-toolbar select{background:#141518;border:1px solid #494b50;color:#fff;padding:10px;min-width:140px}
 
 .season-edit-panel{margin:20px 0;padding:18px;border:1px solid #575b63;background:#14161a}.season-edit-panel h2{margin-top:0}.season-edit-panel .admin-form{margin-bottom:0}.season-edit-actions{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap}
+
+.inspection-admin-detail{margin:20px 0;padding:20px;background:#17191d;border:1px solid #505259}.inspection-admin-detail h3{font-size:14px;color:#e83a32;margin:18px 0 5px}.inspection-admin-detail p{white-space:pre-wrap;overflow-wrap:anywhere;color:#d6d7da;font-size:14px}.season-table td .admin-btn{margin:2px}
