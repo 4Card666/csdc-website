@@ -7,11 +7,15 @@
 
 **Community Simulated Drift Competition**
 
-CSDC（Community Simulated Drift Competition）是基于 Assetto Corsa 开展的虚拟漂移社区赛事。
+CSDC（Community Simulated Drift Competition）是基于 Assetto Corsa （神力科莎）开展的虚拟漂移社区赛事组织，汇聚了来自中国大陆及台湾地区、拥有不同模拟赛车经历的漂移爱好者。
 
-本仓库为 CSDC 官方网站的源代码仓库，用于建设、维护和发布 CSDC 赛事相关的官方网站功能。
+CSDC 致力于推动国内神力科莎模拟漂移社区的规范化发展，通过建立统一、公平、专业的赛事标准与竞技环境，提升模拟漂移领域的整体竞技水平，促进漂移技术交流与社区文化的发展。
 
-官方网站：**https://csdc.website/** 或在任意浏览器顶部搜索栏输入：csdc.website
+**以规范建立标准，以竞技推动进步，以热爱凝聚车手。**
+
+本仓库为 CSDC 官方网站的源代码仓库，用于建设、维护和发布 CSDC 赛事相关的网站功能，包括赛事信息发布、车手管理、赛季管理、分站赛事报名及车辆数据审核等。
+
+**官方网站：https://csdc.website/** 或在任意浏览器顶端输入csdc.website
 
 ---
 
