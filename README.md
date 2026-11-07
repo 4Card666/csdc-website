@@ -1,3 +1,8 @@
+
+<p align="center">
+  <img src="assets/readme/csdc-logo.png" alt="CSDC Logo" width="800">
+</p>
+
 # CSDC 官方网站
 
 **Community Simulated Drift Competition**
