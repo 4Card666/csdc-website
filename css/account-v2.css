@@ -13,3 +13,5 @@
 .account-v2-link{display:inline-block;padding:11px 15px;background:#e83a32;color:white!important;font-size:13px;font-weight:700}
 .account-v2-muted{color:#a8aab0}
 @media(max-width:650px){.account-v2-section h2{font-size:17px}}
+
+.season-number-entry{border:1px solid #383a3f;padding:16px;margin:12px 0;background:#17191d}.season-number-entry h3{margin:0 0 10px}.season-number-entry p{color:#c4c7cd;font-size:13px}.season-number-form{display:grid;gap:10px;max-width:360px}.season-number-form label{display:grid;gap:8px;font-size:13px}.season-number-form input{background:#0c0d10;border:1px solid #494b50;color:#fff;padding:11px;font:inherit}
