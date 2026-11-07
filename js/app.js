@@ -1,15 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".year").forEach(el => el.textContent = new Date().getFullYear());
 
-  const menuButton = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-  if (menuButton && nav) {
-    menuButton.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("nav-open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-    });
-  }
-
   const driverCard = driver => `
     <article class="driver-card">
       <div class="driver-visual">
