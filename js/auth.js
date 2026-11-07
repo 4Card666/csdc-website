@@ -22,7 +22,7 @@
     const user = await session(); link.textContent = user ? '个人中心' : '登录 / 注册'; link.href = user ? 'account.html' : 'login.html';
   }
   async function profile(user) {
-    const {data,error} = await client.from('profiles').select('username, display_name, account_status, role, created_at').eq('id', user.id).single();
+    const {data,error} = await client.from('profiles').select('username, display_name, account_status, role, created_at, rejection_reason').eq('id', user.id).single();
     if (error) throw error; return data;
   }
   async function initAccount() {
@@ -39,6 +39,8 @@
       const labels = {pending:'等待管理员审核',approved:'已审核通过',rejected:'审核未通过',suspended:'账号已停用'};
       $('account-status').textContent = labels[data.account_status] || '状态未知';
       $('account-role').textContent = data.role === 'admin' ? '管理员' : '普通用户';
+      window.CSDCAccountProfile = data;
+      document.dispatchEvent(new CustomEvent('csdc:account-profile', { detail: data }));
       $('account-note').textContent = data.account_status === 'approved' ? '账号已通过审核。' : data.account_status === 'pending' ? '邮箱验证完成后，仍需等待管理员审核；账号审核与正式车手资格是两回事。' : '如需帮助，请联系 CSDC 管理员。';
     } catch (err) { message('读取用户资料失败：' + prettyError(err), true); $('account-status').textContent = '无法读取'; }
     $('logout-button')?.addEventListener('click', async () => { const {error} = await client.auth.signOut(); if (error) message(prettyError(error),true); else window.location.replace('login.html'); });

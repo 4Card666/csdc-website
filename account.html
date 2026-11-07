@@ -1,6 +1,19 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人中心 | CSDC</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/auth.css"><link rel="stylesheet" href="css/account-v2.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.js" defer></script><script src="js/supabase-config.js" defer></script><script src="js/auth.js" defer></script><script src="js/account-v2.js" defer></script><script src="js/season-number.js" defer></script><link rel="stylesheet" href="css/site-nav.css">
 <script src="js/site-nav.js" defer></script>
 </head><body><header class="site-header"><a class="brand" href="index.html"><span>CSDC<small>Community Simulated Drift Competition</small></span></a><a class="auth-nav-link" data-auth-nav href="login.html">登录 / 注册</a></header><main class="auth-shell"><section class="auth-panel"><p class="eyebrow">MY ACCOUNT</p><h1>个人中心</h1><p class="auth-lead">查看账号状态、正式车手资格及赛事报名记录。</p><p id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></p><dl class="auth-info"><dt>邮箱</dt><dd id="account-email">加载中…</dd><dt>邮箱验证</dt><dd id="account-verified">加载中…</dd><dt>用户名</dt><dd id="account-username">加载中…</dd><dt>显示名称</dt><dd id="account-name">加载中…</dd><dt>账号状态</dt><dd id="account-status">加载中…</dd><dt>账号角色</dt><dd id="account-role">加载中…</dd></dl><p class="auth-note" id="account-note"></p>
+<section id="account-resubmit-section" class="account-resubmit-section" aria-labelledby="resubmit-title" hidden>
+<h2 id="resubmit-title">账号审核未通过</h2>
+<p class="auth-note">请根据管理员的审核意见修改注册资料，然后重新提交。提交后账号将返回等待管理员审核状态。</p>
+<div class="account-resubmit-reason"><strong>管理员拒绝原因</strong><p id="resubmit-reason">正在读取…</p></div>
+<form id="account-resubmit-form" class="auth-form">
+<label class="auth-field">用户名<input id="resubmit-username" name="username" type="text" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" autocomplete="username" required></label>
+<p class="auth-note">3–24 位英文字母、数字或下划线。</p>
+<label class="auth-field">显示名称<input id="resubmit-display-name" name="display_name" type="text" minlength="2" maxlength="30" required></label>
+<p class="auth-note">2–30 个字符。</p>
+<p id="resubmit-feedback" class="auth-message" role="status" aria-live="polite" hidden></p>
+<button class="auth-submit" type="submit">保存修改并重新提交审核</button>
+</form>
+</section>
 <div class="account-v2-sections">
 <section class="account-v2-section" aria-labelledby="driver-title"><h2 id="driver-title">正式车手资格</h2><p id="driver-status" class="account-v2-status">正在读取…</p><p class="auth-note">账号审核通过不代表自动获得正式车手资格。车手资格由 CSDC 管理员授予。</p></section>
 <section class="account-v2-section" aria-labelledby="season-number-title"><h2 id="season-number-title">赛季车手号</h2><p class="auth-note">每个赛季自行申请车号，管理员批准后正式绑定；同赛季不可更改。</p><div id="season-number-content">正在读取赛季信息…</div></section>

@@ -24,6 +24,43 @@
     if (!records.length) { const p=document.createElement('p'); p.className='account-v2-muted'; p.textContent=empty; root.appendChild(p); return; }
     records.forEach(row => root.appendChild(item(map(row))));
   }
+  function initResubmission(client, profile) {
+    const section = $('account-resubmit-section');
+    const form = $('account-resubmit-form');
+    if (!section || !form || profile?.account_status !== 'rejected' || profile?.role !== 'user') return;
+    section.hidden = false;
+    $('resubmit-reason').textContent = profile.rejection_reason?.trim() || '管理员未提供详细拒绝原因，请联系 CSDC 管理员。';
+    $('resubmit-username').value = profile.username || '';
+    $('resubmit-display-name').value = profile.display_name || '';
+    const feedback = $('resubmit-feedback');
+    const notify = (message, error=false) => {
+      feedback.textContent = message;
+      feedback.className = 'auth-message ' + (error ? 'auth-error' : 'auth-success');
+      feedback.hidden = false;
+    };
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const username = $('resubmit-username').value.trim();
+      const displayName = $('resubmit-display-name').value.trim();
+      if (!/^[A-Za-z0-9_]{3,24}$/.test(username)) { notify('用户名必须为 3–24 位英文字母、数字或下划线。', true); return; }
+      if (Array.from(displayName).length < 2 || Array.from(displayName).length > 30) { notify('显示名称必须为 2–30 个字符。', true); return; }
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      feedback.hidden = true;
+      try {
+        const {data, error} = await client.rpc('resubmit_account_review', {p_username: username, p_display_name: displayName});
+        if (error) throw error;
+        if (!data?.success || data.new_status !== 'pending') throw new Error('服务器未确认重新提交成功');
+        notify('已重新提交，正在更新账号状态…');
+        window.location.reload();
+      } catch (err) {
+        const message = /unique|duplicate|profiles_username_lower_unique/i.test(err.message || '') ? '用户名已被使用，请更换用户名。' : (err.message || '未知错误');
+        notify('提交失败：' + message, true);
+        button.disabled = false;
+      }
+    });
+  }
   async function init() {
     if (!$('driver-status')) return;
     const config = window.CSDC_SUPABASE_URL && window.CSDC_SUPABASE_PUBLISHABLE_KEY;
@@ -32,8 +69,9 @@
     const {data:auth,error:authError} = await client.auth.getUser();
     if (authError || !auth?.user) return;
     const user = auth.user;
-    const {data:profile,error:profileError} = await client.from('profiles').select('account_status,role').eq('id',user.id).single();
+    const {data:profile,error:profileError} = await client.from('profiles').select('account_status,role,username,display_name,rejection_reason').eq('id',user.id).single();
     if (profileError) { show('driver-status','读取账号信息失败'); return; }
+    initResubmission(client, profile);
     if (profile.role === 'admin' && profile.account_status === 'approved') $('admin-entry').hidden = false;
     const allowed = profile.account_status === 'approved';
     $('profile-change-form').hidden = !allowed;
