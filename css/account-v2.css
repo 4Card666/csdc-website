@@ -1,0 +1,15 @@
+/* Account v2: scoped styles; original site and auth styles remain unchanged */
+.auth-shell:has(.account-v2-sections){max-width:800px}
+.account-v2-sections{display:grid;gap:18px;margin:28px 0 22px}
+.account-v2-section{border-top:1px solid #36383c;padding-top:20px}
+.account-v2-section h2{font-size:19px;margin:0 0 12px;color:#fff}
+.account-v2-section h3{font-size:14px;margin:18px 0 10px}
+.account-v2-status{font-size:15px;font-weight:700;color:#fff}
+.account-v2-section .auth-field select{width:100%;background:#0d0e10;color:#fff;border:1px solid #424349;padding:12px;font:inherit;border-radius:3px}
+.account-v2-list{display:grid;gap:10px;font-size:13px}
+.account-v2-item{border:1px solid #34363b;background:#111316;padding:14px;line-height:1.8;overflow-wrap:anywhere}
+.account-v2-item strong{color:#fff}
+.account-v2-item small{display:block;color:#a8aab0;margin-top:4px}
+.account-v2-link{display:inline-block;padding:11px 15px;background:#e83a32;color:white!important;font-size:13px;font-weight:700}
+.account-v2-muted{color:#a8aab0}
+@media(max-width:650px){.account-v2-section h2{font-size:17px}}
