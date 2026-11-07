@@ -43,6 +43,57 @@
     } catch (err) { message('读取用户资料失败：' + prettyError(err), true); $('account-status').textContent = '无法读取'; }
     $('logout-button')?.addEventListener('click', async () => { const {error} = await client.auth.signOut(); if (error) message(prettyError(error),true); else window.location.replace('login.html'); });
   }
+  // 重新发送注册验证邮件。Supabase 可能对不存在的邮箱返回模糊成功响应，避免暴露账号是否存在。
+  function initResendForm() {
+    const form = $('resend-form');
+    if (!form) return;
+    const button = $('resend-button');
+    const feedback = $('resend-message');
+    const input = $('resend-email');
+    const cooldownMs = 60000;
+    let nextAllowedAt = 0;
+    let timer = null;
+    const show = (txt, error = false) => {
+      feedback.textContent = txt;
+      feedback.className = 'auth-message ' + (error ? 'auth-error' : 'auth-success');
+      feedback.hidden = false;
+    };
+    const refreshButton = () => {
+      const remaining = Math.ceil((nextAllowedAt - Date.now()) / 1000);
+      button.disabled = !client || remaining > 0;
+      button.textContent = remaining > 0 ? `请等待 ${remaining} 秒后重试` : '重新发送验证邮件';
+      if (remaining <= 0 && timer) { clearInterval(timer); timer = null; }
+    };
+    if (!client) { button.disabled = true; show('邮箱服务暂不可用，请稍后再试。', true); return; }
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (Date.now() < nextAllowedAt) return;
+      const email = input.value.trim();
+      if (!input.checkValidity() || !email) { input.reportValidity(); return; }
+      button.disabled = true;
+      button.textContent = '正在提交请求…';
+      feedback.hidden = true;
+      try {
+        const redirectTo = new URL('account.html', window.location.href).href;
+        const {error} = await client.auth.resend({type:'signup',email,options:{emailRedirectTo:redirectTo}});
+        if (error) throw error;
+        show('请求已受理。如果该邮箱有尚未验证的注册账号，请检查收件箱和垃圾邮件。邮件是否送达取决于收件服务商。');
+        nextAllowedAt = Date.now() + cooldownMs;
+        refreshButton();
+        timer = setInterval(refreshButton, 1000);
+      } catch (err) {
+        show('请求失败：' + prettyError(err), true);
+        button.disabled = false;
+        button.textContent = '重新发送验证邮件';
+      }
+    });
+    const existingEmail = $('reg-email') || $('login-email');
+    if (existingEmail) {
+      existingEmail.addEventListener('change', () => {
+        if (!input.value.trim()) input.value = existingEmail.value.trim();
+      });
+    }
+  }
   async function initForms() {
     const reg = $('register-form'); const login = $('login-form');
     if (!reg && !login) return;
@@ -69,6 +120,6 @@
       } catch(err) { message(prettyError(err),true); } finally { setBusy(login,false); }
     });
   }
-  document.addEventListener('DOMContentLoaded', () => { refreshNav(); initForms(); initAccount(); });
+  document.addEventListener('DOMContentLoaded', () => { refreshNav(); initForms(); initResendForm(); initAccount(); });
   window.CSDCAuth = { configured };
 })();
