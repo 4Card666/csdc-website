@@ -12,7 +12,7 @@ CSDC（Community Simulated Drift Competition）是基于 Assetto Corsa 开展的
 
 ## 一、项目介绍
 
-CSDC 官方网站旨在为CN神力科莎的参赛车手、赛事组织者及模拟赛车爱好者提供统一的信息发布与赛事管理平台。
+CSDC 官方网站旨在为 CN 神力科莎的参赛车手、赛事组织者、模拟赛车爱好者以及 CSDC 的相关人员提供统一的信息发布与赛事管理平台。
 
 网站涵盖赛事信息、车手资料、赛季管理、报名审核、车辆数据审核、赛事历史、资源下载及合作伙伴展示等功能。
 
@@ -161,9 +161,9 @@ CSDC 官方网站旨在为CN神力科莎的参赛车手、赛事组织者及模�
 - SIMAGIC
 - FeiChiShiSanSaiChe（飞驰十三赛车）
 - GT-Rally
-- Mori（末日）
+- Mori（末日的漂移计划）
 - KeepRacing
-- XD Racing（小杜模拟器）
+- XD Racing（小杜赛车模拟器）
 - Esports Drift Association（ESDA）
 
 合作伙伴名单可能随赛事安排及合作情况调整，具体以 CSDC 官方网站公布的信息为准。
