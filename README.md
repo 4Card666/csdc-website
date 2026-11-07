@@ -6,7 +6,7 @@ CSDC（Community Simulated Drift Competition）是基于 Assetto Corsa 开展的
 
 本仓库为 CSDC 官方网站的源代码仓库，用于建设、维护和发布 CSDC 赛事相关的官方网站功能。
 
-官方网站：**https://csdc.website/** 或直接在顶部搜索栏输入：csdc.website
+官方网站：**https://csdc.website/** 或在任意浏览器顶部搜索栏输入：csdc.website
 
 ---
 
@@ -186,7 +186,7 @@ CSDC 是围绕 Assetto Corsa 开展的社区虚拟漂移赛事项目。
 
 CSDC 官方网站是 itz4Card 在 GitHub 上制作的第一个项目。
 
-从最初的静态页面，到逐步加入账号认证、赛事报名、赛季车号、车辆审核及管理员后台，网站一直随着 CSDC 赛事的实际需求不断完善。
+从最初的静态页面，到逐步加入账号认证、赛事报名及管理员后台等各种功能，网站一直随着 CSDC 赛事的实际需求不断完善。
 
 希望这个项目能够长期记录 CSDC 的发展历程，并为参与赛事的车手和社区成员提供更方便、可靠的服务。
 
@@ -199,9 +199,6 @@ CSDC 官方网站是 itz4Card 在 GitHub 上制作的第一个项目。
 GitHub 仓库：https://github.com/4Card666/csdc-website
 
 ---
-
-
-
 
 
 <div align="right">
