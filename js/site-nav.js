@@ -3,7 +3,7 @@
   const groups = [
     {label:'首页',href:'index.html'},
     {label:'赛事',items:[
-      ['赛事安排','schedule.html'],['分站报名（开发中）',null],['赛事积分','standings.html'],
+      ['赛事安排','schedule.html'],['分站报名','registration.html'],['赛事积分','standings.html'],
       ['年度车手 TOP 10','top10.html'],['赛事历史','history.html']]},
     {label:'车手列表',href:'drivers.html'},
     {label:'资源下载',href:'resources.html'},
