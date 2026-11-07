@@ -6,7 +6,7 @@ CSDC（Community Simulated Drift Competition）是基于 Assetto Corsa 开展的
 
 本仓库为 CSDC 官方网站的源代码仓库，用于建设、维护和发布 CSDC 赛事相关的官方网站功能。
 
-官方网站：**https://csdc.website/**或直接在顶部搜索栏输入：csdc.website
+官方网站：**https://csdc.website/** 或直接在顶部搜索栏输入：csdc.website
 
 ---
 
@@ -132,7 +132,7 @@ CSDC 官方网站旨在为CN神力科莎的参赛车手、赛事组织者及模�
 
 **网站开发：** [@itz4Card](https://github.com/4Card666)
 
-**网站管理员：** @itz4Card
+**网站管理员：** [@itz4Card](https://github.com/4Card666)
 
 本项目在开发过程中使用 ChatGPT 辅助完成大部分架构设计、代码编写、问题排查与功能优化。
 
@@ -200,11 +200,6 @@ GitHub 仓库：https://github.com/4Card666/csdc-website
 
 ---
 
-
-
-
-
----
 
 心中那場雨未停
 **—— itz4Card**  
