@@ -10,7 +10,7 @@ CSDC（Community Simulated Drift Competition）是基于 Assetto Corsa 开展的
 
 ---
 
-# 一、项目介绍
+## 一、项目介绍
 
 CSDC 官方网站旨在为 CN 神力科莎的参赛车手、赛事组织者、模拟赛车爱好者以及 CSDC 的相关人员提供统一的信息发布与赛事管理平台。
 
