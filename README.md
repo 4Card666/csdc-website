@@ -202,13 +202,15 @@ GitHub 仓库：https://github.com/4Card666/csdc-website
 
 
 
----
+
 
 <div align="right">
 
-飛鳥速度做楽場 —— <strong>itz4Card</strong>
+ —— <strong>itz4Card</strong>
 
 2026 年 11 月 8 日 1:10 AM
+
+飛鳥速度做楽場
 
 </div>
 
