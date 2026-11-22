@@ -14,6 +14,7 @@ const adminLastTabs = {users:'user-directory',events:'seasons',top10:'top10-iden
 function storedAdminTab(){try{return window.sessionStorage.getItem('csdc_admin_current_tab_v1');}catch{return null;}}
 function rememberAdminTab(value){try{window.sessionStorage.setItem('csdc_admin_current_tab_v1',value);}catch{}}
 let dashboard = null, tab = adminTabGroups[storedAdminTab()] ? storedAdminTab() : 'user-directory', busy = false, eventContext = null;
+let revokedDriverFallback = [];
 adminLastTabs[adminTabGroups[tab]] = tab;
 function updateAdminNavigation(){
   const currentGroup=adminTabGroups[tab]||'users';
@@ -89,7 +90,48 @@ function renderUsers(){
  }));
 }
 function renderChanges(){return grid((dashboard.profile_changes||[]).map(r=>card(display(r.username)+' · '+(r.field_name==='username'?'用户名':'昵称'),['申请：'+display(r.old_value)+' → '+display(r.new_value),'状态：'+display(statusText[r.status])+' · '+date(r.created_at),r.rejection_reason?'原因：'+r.rejection_reason:''],r.status==='pending'?[['批准',()=>confirmRun('确认批准这条资料修改申请？','admin_review_profile_change',{p_request_id:r.id,p_action:'approve'},'primary')],['拒绝',()=>reasonRun('拒绝资料修改申请','admin_review_profile_change',{p_request_id:r.id,p_action:'reject'},'danger')]]:[])));}
-function renderDrivers(){return grid((dashboard.drivers||[]).map(d=>card(display(d.username)+' · '+display(d.display_name),['车手资格：'+display(statusText[d.driver_status]),'账号：'+display(statusText[d.account_status]),'授予时间：'+date(d.approved_at)],d.driver_status==='approved'?[['撤销资格',()=>reasonRun('撤销车手资格','admin_set_driver_status',{p_user_id:d.user_id,p_action:'revoke'},'danger')]]:[])));}
+// 历史资格恢复：只调用管理员权限保护的 RPC，不直接修改 drivers 表。
+function restoreDriver(d){
+ if(!window.confirm('确认恢复 '+display(d.display_name||d.username)+'（@'+display(d.username)+'）之前已获批准的车手资格？\n这不会恢复已删除的赛季车号，也不会生成缴费记录。'))return;
+ const reason=window.prompt('请填写恢复原因（5–1000 字符）：\n例如：此前因测试误撤销资格，现经核实恢复原车手身份。');
+ if(reason===null)return;
+ const note=reason.trim();
+ if(note.length<5||note.length>1000){msg('恢复原因必须为 5–1000 个字符。',true);return;}
+ run('admin_restore_driver_status',{p_user_id:d.user_id,p_reason:note},'车手资格已恢复。已删除的赛季车号不会自动恢复。');
+}
+// 若旧版 dashboard RPC 未返回已撤销资格记录，通过既有管理员只读档案接口补充显示。
+async function loadRevokedDriverFallback(){
+ const data=await rpc('admin_list_user_directory',{});
+ revokedDriverFallback=Array.isArray(data) ? data.filter(u=>u.driver_status==='revoked') : [];
+}
+function renderDrivers(){
+ const records=[...(dashboard.drivers||[])];
+ const known=new Set(records.map(d=>d.user_id));
+ for(const u of revokedDriverFallback){
+  if(!known.has(u.id)){
+   records.push({user_id:u.id,username:u.username,display_name:u.display_name,account_status:u.account_status,driver_status:'revoked'});
+   known.add(u.id);
+  }
+ }
+ return grid(records.map(d=>{
+  const lines=[
+   '车手资格：'+display(statusText[d.driver_status]||d.driver_status),
+   '账号：'+display(statusText[d.account_status]||d.account_status),
+   '授予时间：'+date(d.approved_at)
+  ];
+  const actions=[];
+  if(d.driver_status==='approved'){
+   actions.push(['撤销资格',()=>reasonRun('撤销车手资格','admin_set_driver_status',{p_user_id:d.user_id,p_action:'revoke'},'danger')]);
+  }else if(d.driver_status==='revoked'){
+   if(d.account_status==='approved'){
+    actions.push(['恢复资格',()=>restoreDriver(d),'primary']);
+   }else{
+    lines.push('账号尚未通过审核，不能恢复资格');
+   }
+  }
+  return card(display(d.username)+' · '+display(d.display_name),lines,actions);
+ }));
+}
 async function loadEventContext(){eventContext=await rpc('admin_get_event_season_context',{});}
 function eventForm(event=null){
  const editing=Boolean(event), form=el('form','admin-form');
@@ -150,13 +192,27 @@ function render(){const stats=dashboard.stats||{};const metrics=[['用户总数'
     }
   });
 }else if(sections[tab])$('admin-content').replaceChildren(sections[tab]());else $('admin-content').replaceChildren();}
-async function load(clear=true){if(clear)msg('');const result=await rpc('admin_get_dashboard_data',{});dashboard=result;if(tab==='events')await loadEventContext();render();}
+async function load(clear=true){
+ if(clear)msg('');
+ const result=await rpc('admin_get_dashboard_data',{});
+ dashboard=result;
+ if(tab==='events')await loadEventContext();
+ if(tab==='drivers'){
+  try{await loadRevokedDriverFallback();}
+  catch(e){revokedDriverFallback=[];msg('补充读取已撤销车手列表失败：'+(e.message||'未知错误'),true);}
+ }
+ render();
+}
 async function init(){if(!client){$('admin-loading').textContent='Supabase 配置缺失。';return;}try{const {data,error}=await client.auth.getUser();if(error||!data.user){location.replace('login.html');return;}const isAdmin=await rpc('is_csdc_admin',{});if(!isAdmin){$('admin-loading').textContent='无管理员权限。';return;}await load();$('admin-loading').hidden=true;$('admin-app').hidden=false;document.querySelectorAll('#admin-tabs [data-tab]').forEach(b=>b.addEventListener('click',()=>{
   tab=b.dataset.tab;
   adminLastTabs[adminTabGroups[tab]]=tab;
   rememberAdminTab(tab);
   if(tab==='events'){
     loadEventContext().then(()=>render()).catch(e=>msg('读取赛季信息失败：'+e.message,true));
+  }else if(tab==='drivers'){
+    loadRevokedDriverFallback()
+      .then(()=>{if(tab==='drivers')render();})
+      .catch(e=>{if(tab==='drivers'){render();msg('补充读取已撤销车手列表失败：'+(e.message||'未知错误'),true);}});
   }else render();
 }));
 // 始终通过点击原有的二级按钮完成切换，让其余模块的监听及
