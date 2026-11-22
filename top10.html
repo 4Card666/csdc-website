@@ -141,7 +141,8 @@
             <p>该年度的官方车手排名尚未录入。待核实官方成绩后，将在这里展示年度前三名荣誉卡片及完整 TOP 10 积分榜。</p>
           </div>
         </div>
-        <p class="top10-note">排名与积分以该年度官方最终成绩为准，尚未核实的数据不会显示为正式排名。车手设备请以最新更新的档案为准。<br>注：远门选手在2025赛季获得了年度Top10→→若远门选手在2026赛季也获得了年度Top10，则2025年的设备档案将使用截止至2025年12月31日前远门选手提交的最新档案，未提交档案则不显示。其他年份同理。</p>
+        <p class="top10-note" id="top10-data-notice" role="status"></p>
+        <p class="top10-note">排名与积分以该年度官方最终成绩为准，尚未核实的数据不会显示为正式排名。车手设备请以最新更新的档案为准。<br>同一位车手在不同年度的设备档案共用一份最新审核通过的资料；待审核的修改不会公开。</p>
       </div>
     </section>
   </main>
@@ -154,13 +155,16 @@
 
   <script src="js/top10-data.js"></script>
   <script>
-    (function () {
+    document.addEventListener("DOMContentLoaded", function () {
       const tabs = Array.from(document.querySelectorAll(".top10-year-tab"));
       const title = document.getElementById("top10-section-title");
       const status = document.getElementById("top10-status");
       const content = document.getElementById("top10-content");
       const allSeasons = Array.isArray(window.CSDCTop10Data) ? window.CSDCTop10Data : [];
       const medalClasses = ["first", "second", "third"];
+      let databaseSeasons = null;
+      let databaseError = false;
+      let activeYear = '2024';
 
       function escapeHTML(value) {
         return String(value).replace(/[&<>"']/g, function (char) {
@@ -169,7 +173,8 @@
       }
 
       function renderSeason(year) {
-        const season = allSeasons.find(item => String(item.year) === String(year));
+        activeYear = String(year);
+        const season = (databaseSeasons || allSeasons).find(item => String(item.year) === String(year));
         title.textContent = year + " 年度榜单";
         tabs.forEach(tab => tab.setAttribute("aria-pressed", tab.dataset.year === String(year) ? "true" : "false"));
 
@@ -248,7 +253,8 @@
         ];
 
         const driverCards = drivers.map(driver => {
-          const equipment = driver.equipment || {};
+          // 只有数据库返回的已审核档案才公开；静态备用榜单不显示旧设备资料。
+          const equipment = databaseSeasons ? (driver.equipment || {}) : {};
           const sections = equipmentCategories.map(category =>
             renderEquipmentSection(category.title, equipment[category.key], category.fields)
           ).filter(Boolean).join('');
@@ -275,16 +281,58 @@
       tabs.forEach(tab => tab.addEventListener("click", () => renderSeason(tab.dataset.year)));
       renderSeason(2024);
 
-      const menuToggle = document.querySelector(".menu-toggle");
-      const nav = document.querySelector(".nav");
-      if (menuToggle && nav) {
-        menuToggle.addEventListener("click", function () {
-          const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-          menuToggle.setAttribute("aria-expanded", String(!expanded));
-          nav.classList.toggle("active");
-        });
+      async function loadPublicLeaderboard() {
+        try {
+          if (!window.supabase?.createClient || !window.CSDC_SUPABASE_URL || !window.CSDC_SUPABASE_PUBLISHABLE_KEY) {
+            throw new Error('Supabase 未初始化');
+          }
+          const client = window.supabase.createClient(window.CSDC_SUPABASE_URL, window.CSDC_SUPABASE_PUBLISHABLE_KEY);
+          const { data, error } = await client.rpc('top10_get_public_leaderboard');
+          if (error) throw error;
+          if (!Array.isArray(data)) throw new Error('榜单返回格式异常');
+          const seasons = new Map();
+          for (const row of data) {
+            const year = Number(row.season_year);
+            if (!Number.isInteger(year) || !Number.isInteger(Number(row.rank))) continue;
+            if (!seasons.has(year)) seasons.set(year, { year, status: 'final', drivers: [] });
+            const equipment = row.profile_data && typeof row.profile_data === 'object' && !Array.isArray(row.profile_data)
+              ? { ...row.profile_data } : {};
+            if (row.profile_updated_at) equipment.updatedAt = String(row.profile_updated_at).slice(0, 10);
+            seasons.get(year).drivers.push({
+              identityId: row.identity_id,
+              rank: Number(row.rank),
+              name: row.identity_name,
+              points: row.points,
+              equipment
+            });
+          }
+          // 数据库是唯一的正式资料来源；即使返回空数组，也不使用静态设备资料。
+          databaseSeasons = Array.from(seasons.values());
+          const years = new Set([...tabs.map(tab => Number(tab.dataset.year)), ...seasons.keys()]);
+          const tabHost = document.getElementById('top10-year-tabs');
+          tabHost.replaceChildren();
+          for (const year of [...years].sort((a, b) => a - b)) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'top10-year-tab';
+            button.dataset.year = String(year);
+            button.textContent = String(year);
+            button.addEventListener('click', () => renderSeason(year));
+            tabHost.appendChild(button);
+          }
+          tabs.splice(0, tabs.length, ...tabHost.querySelectorAll('.top10-year-tab'));
+          renderSeason(activeYear);
+        } catch (error) {
+          databaseError = true;
+          console.warn('TOP10 数据库读取失败，使用静态排名备用显示：', error);
+          const note = document.getElementById('top10-data-notice');
+          if (note) note.textContent = '当前暂时无法连接最新设备档案，以下仅显示备用历史排名；设备资料暂不展示。';
+          renderSeason(activeYear);
+        }
       }
-    })();
+      loadPublicLeaderboard();
+
+    });
   </script>
 </body>
 </html>

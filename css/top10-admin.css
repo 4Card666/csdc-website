@@ -1,0 +1,39 @@
+/* TOP10 admin extensions. Everything is scoped to the two TOP10 panels. */
+.top10-admin{min-width:0}
+.top10-admin h2{font-size:21px;margin:0 0 12px}
+.top10-admin .top10-admin-lead{color:#b6b9c0;font-size:13px;line-height:1.75;margin:0 0 18px}
+.top10-admin-toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.top10-admin-toolbar input,.top10-admin-toolbar select,.top10-admin-card select{background:#0d0f12;border:1px solid #555962;color:#f7f7f7;padding:10px;font:inherit;font-size:13px;min-width:0}
+.top10-admin-toolbar input{flex:1 1 200px}
+.top10-admin-toolbar select{flex:0 1 180px}
+.top10-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.top10-admin-card{min-width:0;background:#17191d;border:1px solid #383b41;padding:18px}
+.top10-admin-card h3{font-size:17px;margin:0 0 12px;overflow-wrap:anywhere}
+.top10-admin-card p{margin:7px 0;font-size:13px;line-height:1.65;color:#c2c5ca;overflow-wrap:anywhere;white-space:pre-wrap}
+.top10-admin-card strong{color:#f8f8f8}
+.top10-admin-card label{display:grid;gap:7px;color:#c6c9cd;font-size:13px;margin:14px 0}
+.top10-admin-card select{width:100%}
+.top10-admin-card .admin-btn{margin-top:8px}
+.top10-admin-card .top10-admin-reason{padding:12px;border:1px solid #34373d;background:#0e1013;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;color:#e0e1e4}
+.top10-admin-flag{display:inline-block;font-size:12px;font-weight:700;color:#f0bf67;margin:3px 0}
+.top10-admin-flag.bound,.top10-admin-flag.approved{color:#70cba0}
+.top10-admin-flag.rejected{color:#e5a2a2}
+.top10-admin-count{color:#b3b7bd;font-size:13px}
+.top10-admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.top10-admin .admin-btn:disabled{opacity:.45;cursor:not-allowed}
+.top10-admin .admin-empty{grid-column:1/-1}
+@media(max-width:850px){.top10-admin-grid{grid-template-columns:1fr}.top10-admin-toolbar input,.top10-admin-toolbar select{flex:1 1 100%}}
+/* Phase 4: published-vs-submitted equipment comparison */
+.top10-review-card{grid-column:1/-1}
+.top10-review-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.top10-review-group{border:1px solid #3b4048;background:#0e1013;padding:13px;min-width:0}
+.top10-review-group h4{margin:0 0 9px;font-size:14px;color:#fff}
+.top10-review-diff{border-top:1px solid #30343b;padding:9px 0}
+.top10-review-diff:first-of-type{border-top:0}
+.top10-review-diff>strong{color:#f0c373;font-size:13px}
+.top10-review-card .top10-review-diff p{margin:4px 0;line-height:1.75;white-space:pre-wrap}
+.top10-review-raw{margin:12px 0;color:#b8bdc5;font-size:12px}
+.top10-review-raw summary{cursor:pointer;padding:9px 0}
+.top10-review-raw pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;background:#101115;border:1px solid #3b3d43;max-height:400px;overflow-y:auto}
+.top10-review-dim{color:#a8adb5;font-size:12px}
+@media(max-width:850px){.top10-review-comparison{grid-template-columns:1fr}}

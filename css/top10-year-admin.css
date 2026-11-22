@@ -1,0 +1,40 @@
+/* CSDC annual TOP10 editor. Namespaced to avoid other admin sections. */
+.top10-year-admin{min-width:0}
+.top10-year-admin h2{font-size:21px;margin:0 0 12px}
+.top10-year-lead{font-size:13px;line-height:1.8;color:#bfc2c9;max-width:940px}
+.top10-year-yearlist{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.top10-year-admin .top10-year-chip{padding:8px 12px;font-size:12px;background:#17191d;border-color:#444951}
+.top10-year-admin .top10-year-chip.is-current{border-color:#e53b35;color:#fff}
+.top10-year-toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:20px 0}
+.top10-year-toolbar label{display:grid;gap:6px;color:#d2d5d9;font-size:13px}
+.top10-year-toolbar input{width:150px;background:#0d0f12;color:#f7f7f7;border:1px solid #545860;padding:10px;font:inherit;font-size:14px}
+.top10-year-toolbar button{min-height:40px}
+.top10-year-summary{font-size:13px;font-weight:700;color:#f1f1f1;margin:14px 0}
+.top10-year-note{font-size:12px;color:#d9ba76;margin:8px 0 20px;line-height:1.7}
+.top10-year-feedback{font-size:13px;border:1px solid #3b594b;background:#12231b;color:#aee6c9;padding:13px;margin:14px 0;line-height:1.7;overflow-wrap:anywhere}
+.top10-year-feedback[data-error="true"]{border-color:#733f3f;background:#2b1618;color:#ffc2c2}
+.top10-year-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.top10-year-row{display:grid;grid-template-columns:68px 1fr 1fr;gap:10px 12px;align-items:start;background:#17191d;border:1px solid #393d45;padding:16px;min-width:0}
+.top10-year-rank{font-size:19px;color:#fff;line-height:34px}
+.top10-year-field{display:grid;gap:6px;min-width:0;font-size:12px;color:#d2d4d8}
+.top10-year-field span{white-space:normal}
+.top10-year-field select,.top10-year-field input{width:100%;min-width:0;max-width:100%;padding:10px 9px;border:1px solid #565962;background:#0e1013;color:#f5f5f5;font:inherit;font-size:13px}
+.top10-year-field[hidden]{display:none}
+.top10-year-source{grid-column:2;grid-row:1}
+.top10-year-existing,.top10-year-new{grid-column:2/-1;grid-row:2}
+.top10-year-points{grid-column:3;grid-row:1}
+.top10-year-inline-help{grid-column:1/-1;font-size:11px;color:#aeb3bc;line-height:1.6;margin:0}
+.top10-year-actions{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.top10-year-actions .admin-btn{min-height:40px}
+.top10-year-admin .admin-btn:disabled{opacity:.4;cursor:not-allowed}
+.top10-year-admin .top10-year-publish{background:#e33730;color:#fff;border-color:#e33730}
+.top10-year-admin .top10-year-danger{border-color:#794e4e;color:#ffc5c5}
+.top10-year-validation{border:1px solid #383b42;padding:14px 16px;background:#101115;line-height:1.7;margin:16px 0;font-size:13px}
+.top10-year-validation p{margin:6px 0}
+.top10-year-check-ok{color:#7fdbb3;font-weight:700}
+.top10-year-check-error{color:#ffa5a5;font-weight:700}
+.top10-year-check-warning{color:#f0c675;font-weight:700}
+.top10-year-issue{color:#d4d6db;overflow-wrap:anywhere}
+.top10-year-muted{font-size:12px;color:#a6abb3;line-height:1.7}
+@media(max-width:1000px){.top10-year-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.top10-year-row{grid-template-columns:45px minmax(0,1fr);gap:10px}.top10-year-rank{grid-column:1}.top10-year-field{grid-column:2}.top10-year-source{grid-row:1}.top10-year-existing,.top10-year-new{grid-column:2;grid-row:2}.top10-year-points{grid-column:2;grid-row:3}.top10-year-inline-help{grid-column:1/-1}}

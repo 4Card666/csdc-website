@@ -1,0 +1,28 @@
+/* TOP10 self-service equipment profiles; isolated to account.html */
+.top10-profile-section .top10-profile-status{font-size:14px;line-height:1.8;color:#e6e8eb;font-weight:650;margin:10px 0 16px}
+.top10-profile-dim{color:#aeb3bc;font-size:12px;line-height:1.75;overflow-wrap:anywhere}
+.top10-profile-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.top10-profile-preview-block,.top10-profile-submission-card{background:#111316;border:1px solid #363a41;padding:14px;min-width:0}
+.top10-profile-preview-block h4{font-size:14px;margin:0 0 10px}
+.top10-profile-preview-block p,.top10-profile-submission-card p{font-size:12px;color:#c8cbd1;margin:7px 0;line-height:1.75;overflow-wrap:anywhere;white-space:pre-wrap}
+.top10-profile-preview-block strong{color:#fff}
+.top10-profile-current,.top10-profile-submission{margin:18px 0}
+.top10-profile-current h3,.top10-profile-submission h3{margin:0 0 12px;font-size:15px}
+.top10-profile-rejection{color:#ffaeaa!important}
+.top10-profile-form{display:grid;gap:14px;margin:22px 0 8px}
+.top10-profile-form h3{font-size:16px;margin:0}
+.top10-profile-fields{display:grid;gap:14px}
+.top10-profile-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;border:1px solid #3d4046;margin:0;padding:16px;min-width:0}
+.top10-profile-group legend{font-size:15px;color:#fff;font-weight:700;padding:0 8px}
+.top10-profile-field{display:grid;gap:6px;font-size:12px;color:#c8cbd0;min-width:0}
+.top10-profile-field input,.top10-profile-field textarea{width:100%;box-sizing:border-box;color:#f6f6f6;background:#0c0e11;border:1px solid #4c4f56;padding:11px;font:inherit;font-size:13px;border-radius:2px;min-width:0}
+.top10-profile-field input:focus,.top10-profile-field textarea:focus{outline:2px solid #e83a32;outline-offset:1px}
+.top10-profile-field textarea{resize:vertical;line-height:1.7;min-height:82px}
+.top10-profile-group .top10-profile-dim{grid-column:1/-1;margin:0}
+.top10-profile-group .top10-profile-other{grid-column:1/-1}
+.top10-profile-form-actions{display:flex;flex-wrap:wrap;gap:10px}
+.top10-profile-form-actions .auth-submit{width:auto;margin:0;flex:1 1 180px}
+.top10-profile-neutral{background:#25282e!important}
+.top10-profile-refresh{display:inline-block;background:#272a31;border:1px solid #4b4e55;color:#fff;padding:9px 13px;font-size:12px;cursor:pointer;margin:4px 0}
+.top10-profile-section [hidden]{display:none!important}
+@media(max-width:650px){.top10-profile-preview-grid,.top10-profile-group{grid-template-columns:1fr}}

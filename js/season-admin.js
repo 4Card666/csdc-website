@@ -98,7 +98,7 @@ async function numbers(root){
   function draw(){
     host.replaceChildren();
     const table=node('table',undefined,'season-table'),tr=node('tr');
-    for(const t of ['赛季','用户名','显示名称','申请车号','状态','会费/资格','上一赛季优先权','同号待审','申请时间','审核时间','原因','操作'])tr.append(node('th',t));
+    for(const t of ['赛季','用户名','昵称','申请车号','状态','会费/资格','上一赛季优先权','同号待审','申请时间','审核时间','原因','操作'])tr.append(node('th',t));
     table.append(tr);let count=0;
     for(const r of rows){
       if((season.value&&r.season_id!==season.value)||(status.value&&r.status!==status.value))continue;

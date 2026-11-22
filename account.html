@@ -1,6 +1,6 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人中心 | CSDC</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/auth.css"><link rel="stylesheet" href="css/account-v2.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.js" defer></script><script src="js/supabase-config.js" defer></script><script src="js/auth.js" defer></script><script src="js/account-v2.js" defer></script><script src="js/season-number.js" defer></script><link rel="stylesheet" href="css/site-nav.css">
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人中心 | CSDC</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/auth.css"><link rel="stylesheet" href="css/account-v2.css"><link rel="stylesheet" href="css/top10-claim.css"><link rel="stylesheet" href="css/top10-profile.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.js" defer></script><script src="js/supabase-config.js" defer></script><script src="js/auth.js" defer></script><script src="js/account-v2.js" defer></script><script src="js/season-number.js" defer></script><script src="js/top10-identity-claim.js" defer></script><script src="js/top10-profile-fields.js" defer></script><script src="js/top10-profile-account.js" defer></script><link rel="stylesheet" href="css/site-nav.css">
 <script src="js/site-nav.js" defer></script>
-</head><body><header class="site-header"><a class="brand" href="index.html"><span>CSDC<small>Community Simulated Drift Competition</small></span></a><a class="auth-nav-link" data-auth-nav href="login.html">登录 / 注册</a></header><main class="auth-shell"><section class="auth-panel"><p class="eyebrow">MY ACCOUNT</p><h1>个人中心</h1><p class="auth-lead">查看账号状态、正式车手资格及赛事报名记录。</p><p id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></p><dl class="auth-info"><dt>邮箱</dt><dd id="account-email">加载中…</dd><dt>邮箱验证</dt><dd id="account-verified">加载中…</dd><dt>用户名</dt><dd id="account-username">加载中…</dd><dt>显示名称</dt><dd id="account-name">加载中…</dd><dt>账号状态</dt><dd id="account-status">加载中…</dd><dt>账号角色</dt><dd id="account-role">加载中…</dd></dl><p class="auth-note" id="account-note"></p>
+</head><body><header class="site-header"><a class="brand" href="index.html"><span>CSDC<small>Community Simulated Drift Competition</small></span></a><a class="auth-nav-link" data-auth-nav href="login.html">登录 / 注册</a></header><main class="auth-shell"><section class="auth-panel"><p class="eyebrow">MY ACCOUNT</p><h1>个人中心</h1><p class="auth-lead">查看账号状态、正式车手资格及赛事报名记录。</p><p id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></p><dl class="auth-info"><dt>邮箱</dt><dd id="account-email">加载中…</dd><dt>邮箱验证</dt><dd id="account-verified">加载中…</dd><dt>用户名</dt><dd id="account-username">加载中…</dd><dt>昵称</dt><dd id="account-name">加载中…</dd><dt>账号状态</dt><dd id="account-status">加载中…</dd><dt>账号角色</dt><dd id="account-role">加载中…</dd></dl><p class="auth-note" id="account-note"></p>
 <section id="account-resubmit-section" class="account-resubmit-section" aria-labelledby="resubmit-title" hidden>
 <h2 id="resubmit-title">账号审核未通过</h2>
 <p class="auth-note">请根据管理员的审核意见修改注册资料，然后重新提交。提交后账号将返回等待管理员审核状态。</p>
@@ -8,7 +8,7 @@
 <form id="account-resubmit-form" class="auth-form">
 <label class="auth-field">用户名<input id="resubmit-username" name="username" type="text" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" autocomplete="username" required></label>
 <p class="auth-note">3–24 位英文字母、数字或下划线。</p>
-<label class="auth-field">显示名称<input id="resubmit-display-name" name="display_name" type="text" minlength="2" maxlength="30" required></label>
+<label class="auth-field">昵称<input id="resubmit-display-name" name="display_name" type="text" minlength="2" maxlength="30" required></label>
 <p class="auth-note">2–30 个字符。</p>
 <p id="resubmit-feedback" class="auth-message" role="status" aria-live="polite" hidden></p>
 <button class="auth-submit" type="submit">保存修改并重新提交审核</button>
@@ -17,7 +17,44 @@
 <div class="account-v2-sections">
 <section class="account-v2-section" aria-labelledby="driver-title"><h2 id="driver-title">正式车手资格</h2><p id="driver-status" class="account-v2-status">正在读取…</p><p class="auth-note">账号审核通过不代表自动获得正式车手资格。车手资格由 CSDC 管理员授予。</p></section>
 <section class="account-v2-section" aria-labelledby="season-number-title"><h2 id="season-number-title">赛季车手号</h2><p class="auth-note">每个赛季自行申请车号，管理员批准后正式绑定；同赛季不可更改。</p><div id="season-number-content">正在读取赛季信息…</div></section>
-<section class="account-v2-section" aria-labelledby="change-title"><h2 id="change-title">资料修改申请</h2><p class="auth-note">已通过审核的账号可以申请修改用户名或显示名称，管理员批准后才会生效。</p><form id="profile-change-form" class="auth-form" hidden><label class="auth-field">修改项目<select id="change-field" required><option value="display_name">显示名称</option><option value="username">用户名</option></select></label><label class="auth-field">新内容<input id="change-value" maxlength="30" required autocomplete="off" placeholder="请输入新的显示名称"></label><button class="auth-submit" type="submit">提交修改申请</button></form><p id="change-unavailable" class="auth-note" hidden>账号通过审核后才可提交资料修改申请。</p><h3>我的申请记录</h3><div id="change-history" class="account-v2-list">正在读取…</div></section>
+<section id="top10-claim-section" class="account-v2-section top10-claim-section" aria-labelledby="top10-claim-title">
+<h2 id="top10-claim-title">TOP10 历史车手身份认领</h2>
+<p class="auth-note">曾入选年度 TOP10 的车手可以申请将历史身份绑定至当前账号。历史身份与正式车手资格相互独立；同一位车手跨年度只需认领一次。</p>
+<p id="top10-claim-status" class="top10-claim-status" role="status" aria-live="polite">正在读取 TOP10 身份状态…</p>
+<div id="top10-claim-details" class="top10-claim-details" hidden></div>
+<form id="top10-claim-form" class="auth-form top10-claim-form" hidden>
+<label class="auth-field" for="top10-claim-identity">选择您的历史 TOP10 身份
+<select id="top10-claim-identity" required><option value="">请选择历史车手…</option></select>
+</label>
+<p id="top10-claim-identity-hint" class="auth-note" hidden></p>
+<label class="auth-field" for="top10-claim-reason">认领理由（5–2000 字）
+<textarea id="top10-claim-reason" minlength="5" maxlength="2000" rows="5" required placeholder="请说明您与该历史车手身份的关系，并提供管理员可以核实的信息。请勿填写密码等敏感资料。"></textarea>
+</label>
+<p class="auth-note">提交后需要管理员审核。每个账号、每个身份同时只能有一条待审核申请。请勿填写密码或其他敏感信息。</p>
+<button id="top10-claim-submit" class="auth-submit" type="submit">提交身份认领申请</button>
+</form>
+<p id="top10-claim-feedback" class="auth-message" role="status" aria-live="polite" hidden></p>
+</section>
+<section id="top10-profile-section" class="account-v2-section top10-profile-section" aria-labelledby="top10-profile-title">
+<h2 id="top10-profile-title">TOP10 车手设备资料</h2>
+<p class="auth-note">历史 TOP10 身份绑定后可编辑一份跨年度共享的设备与调校资料。提交后须经管理员审核；审核期间公开页面仍显示原有资料。</p>
+<p class="auth-note">此页面暂不支持照片上传；已登记的图片路径将保留，需单独将图片文件放入网站对应目录。</p>
+<p id="top10-profile-status" class="top10-profile-status" role="status" aria-live="polite">正在读取设备资料…</p>
+<div id="top10-profile-current" class="top10-profile-current" hidden></div>
+<div id="top10-profile-submission" class="top10-profile-submission" hidden></div>
+<form id="top10-profile-form" class="top10-profile-form" hidden>
+<h3>编辑设备与设置资料</h3>
+<p class="auth-note">表单项目与现有 TOP10 公开设备档案一致；更多细节可写在「其他设置与说明」。清空字段表示申请删除该项文字。请勿填写电话、邮箱、地址、账号或其他私人信息。资料通过审核后公开展示。</p>
+<div id="top10-profile-fields" class="top10-profile-fields"></div>
+<div class="top10-profile-form-actions">
+<button id="top10-profile-submit" class="auth-submit" type="submit">提交设备资料审核</button>
+<button id="top10-profile-reset" class="auth-submit top10-profile-neutral" type="button">恢复当前公开资料</button>
+</div>
+</form>
+<p id="top10-profile-feedback" class="auth-message" role="status" aria-live="polite" hidden></p>
+<button id="top10-profile-refresh" class="top10-profile-refresh" type="button">刷新设备资料状态</button>
+</section>
+<section class="account-v2-section" aria-labelledby="change-title"><h2 id="change-title">资料修改申请</h2><p class="auth-note">已通过审核的账号可以申请修改用户名或昵称，管理员批准后才会生效。</p><form id="profile-change-form" class="auth-form" hidden><label class="auth-field">修改项目<select id="change-field" required><option value="display_name">昵称</option><option value="username">用户名</option></select></label><label class="auth-field">新内容<input id="change-value" maxlength="30" required autocomplete="off" placeholder="请输入新的昵称"></label><button class="auth-submit" type="submit">提交修改申请</button></form><p id="change-unavailable" class="auth-note" hidden>账号通过审核后才可提交资料修改申请。</p><h3>我的申请记录</h3><div id="change-history" class="account-v2-list">正在读取…</div></section>
 <section class="account-v2-section" aria-labelledby="registration-title"><h2 id="registration-title">我的分站报名</h2><div id="registration-history" class="account-v2-list">正在读取…</div><p class="auth-note">报名功能将在分站报名页面上线后开放。</p></section>
 <section id="admin-entry" class="account-v2-section" hidden><h2>管理员功能</h2><a class="account-v2-link" href="admin.html">进入 CSDC 管理后台</a></section>
 </div><button id="logout-button" class="auth-submit" type="button">退出登录</button></section></main><footer class="site-footer"><a class="footer-brand" href="index.html">CSDC</a><p>Community Simulated Drift Competition</p></footer></body></html>

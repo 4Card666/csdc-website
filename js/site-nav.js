@@ -33,7 +33,7 @@
       wrap.addEventListener('keydown',e=>{if(e.key==='Escape'){wrap.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.focus()}});
     }
     const toggle=document.createElement('button');toggle.type='button';toggle.className='menu-toggle csdc-menu-toggle';toggle.setAttribute('aria-label','打开导航菜单');toggle.setAttribute('aria-controls','csdc-main-nav');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰';
-    const auth=header.querySelector('.auth-nav-link');header.insertBefore(toggle,auth||null);header.insertBefore(nav,auth||null);
+    const auth=header.querySelector('.auth-nav-link');const host=auth?.parentNode || header.querySelector('.header-inner') || header;if(auth && auth.parentNode===host){host.insertBefore(toggle,auth);host.insertBefore(nav,auth)}else{host.append(toggle,nav)}
     function closeGroups(){nav.querySelectorAll('.csdc-nav-group.is-open').forEach(w=>{w.classList.remove('is-open');w.querySelector('button').setAttribute('aria-expanded','false')})}
     toggle.addEventListener('click',()=>{const open=nav.classList.toggle('nav-open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'关闭导航菜单':'打开导航菜单');if(!open)closeGroups()});
     document.addEventListener('click',e=>{if(!nav.contains(e.target))closeGroups();if(!header.contains(e.target)){nav.classList.remove('nav-open');toggle.setAttribute('aria-expanded','false')}});

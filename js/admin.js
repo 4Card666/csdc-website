@@ -2,7 +2,35 @@
 'use strict';
 const $ = id => document.getElementById(id);
 const client = window.supabase?.createClient?.(window.CSDC_SUPABASE_URL, window.CSDC_SUPABASE_PUBLISHABLE_KEY);
-let dashboard = null, tab = 'users', busy = false, eventContext = null;
+// 一级导航与既有模块的唯一映射。保持原有 data-tab、事件监听与业务 RPC 不变。
+const adminTabGroups = Object.freeze({
+  'user-directory':'users',users:'users',changes:'users',drivers:'users',
+  seasons:'events',numbers:'events',events:'events',registrations:'events',inspection:'events','inspection-contacts':'events',
+  'top10-identities':'top10','top10-claims':'top10','top10-profiles':'top10','top10-years':'top10',
+  logs:'system'
+});
+const adminGroupLabels = {users:'用户管理',events:'赛事管理',top10:'TOP10 管理',system:'系统管理'};
+const adminLastTabs = {users:'user-directory',events:'seasons',top10:'top10-identities',system:'logs'};
+function storedAdminTab(){try{return window.sessionStorage.getItem('csdc_admin_current_tab_v1');}catch{return null;}}
+function rememberAdminTab(value){try{window.sessionStorage.setItem('csdc_admin_current_tab_v1',value);}catch{}}
+let dashboard = null, tab = adminTabGroups[storedAdminTab()] ? storedAdminTab() : 'user-directory', busy = false, eventContext = null;
+adminLastTabs[adminTabGroups[tab]] = tab;
+function updateAdminNavigation(){
+  const currentGroup=adminTabGroups[tab]||'users';
+  document.querySelectorAll('#admin-groups [data-admin-group]').forEach(b=>{
+    const selected=b.dataset.adminGroup===currentGroup;
+    b.classList.toggle('active',selected);
+    b.setAttribute('aria-pressed',String(selected));
+  });
+  const heading=document.getElementById('admin-subnav-heading');
+  if(heading)heading.textContent='二级导航 · '+adminGroupLabels[currentGroup];
+  document.querySelectorAll('#admin-tabs [data-tab]').forEach(b=>{
+    b.hidden=adminTabGroups[b.dataset.tab]!==currentGroup;
+    b.classList.toggle('active',b.dataset.tab===tab);
+    if(b.dataset.tab===tab)b.setAttribute('aria-current','page');
+    else b.removeAttribute('aria-current');
+  });
+}
 const statusText = {pending:'待审核',approved:'已通过',rejected:'已拒绝',suspended:'已停用',revoked:'已撤销',draft:'草稿',published:'已发布',closed:'已关闭',cancelled:'已取消',completed:'已结束'};
 const display = value => value == null || value === '' ? '—' : String(value);
 const date = value => value ? new Date(value).toLocaleString('zh-CN',{hour12:false}) : '—';
@@ -14,10 +42,53 @@ async function rpc(name, params){const {data,error}=await client.rpc(name,params
 async function run(name,params,success){if(busy)return;busy=true;msg('正在处理，请稍候…');try{await rpc(name,params);msg(success||'操作成功');await load(false);}catch(e){msg('操作失败：'+(e.message||'未知错误'),true);}finally{busy=false;}}
 function confirmRun(question,name,params){if(window.confirm(question))run(name,params);}
 function reasonRun(question,name,params){const reason=window.prompt(question+'\n请输入原因（取消则不操作）：');if(reason===null)return;if(!reason.trim()){msg('必须填写原因。',true);return;}run(name,{...params,[name==='admin_set_driver_status'?'p_notes':'p_reason']:reason.trim()});}
-function renderUsers(){return grid((dashboard.users||[]).map(u=>{const buttons=[];if(u.role!=='admin'){if(u.account_status==='pending'){buttons.push(['批准账号',()=>confirmRun('确认批准 '+display(u.username)+' 的账号？','admin_review_account',{p_user_id:u.id,p_action:'approve'},'primary')]);buttons.push(['拒绝账号',()=>reasonRun('拒绝 '+display(u.username)+' 的账号','admin_review_account',{p_user_id:u.id,p_action:'reject'},'danger')]);}if(u.account_status==='approved')buttons.push(['停用账号',()=>confirmRun('确认停用该账号？','admin_review_account',{p_user_id:u.id,p_action:'suspend'},'danger')]);if(u.account_status==='suspended')buttons.push(['恢复账号',()=>confirmRun('确认恢复该账号？','admin_review_account',{p_user_id:u.id,p_action:'restore'},'primary')]);}
-buttons.push(['修改昵称',()=>{const name=window.prompt('输入新的显示昵称（2–30 个字符）',u.display_name||'');if(name!==null)run('admin_set_display_name',{p_user_id:u.id,p_display_name:name.trim()});}]);
-return card(display(u.username)+' · '+display(u.display_name),['账号：'+display(statusText[u.account_status])+' / '+(u.role==='admin'?'管理员':'普通用户'),'注册：'+date(u.created_at),'用户 ID：'+u.id],buttons);}));}
-function renderChanges(){return grid((dashboard.profile_changes||[]).map(r=>card(display(r.username)+' · '+(r.field_name==='username'?'用户名':'显示昵称'),['申请：'+display(r.old_value)+' → '+display(r.new_value),'状态：'+display(statusText[r.status])+' · '+date(r.created_at),r.rejection_reason?'原因：'+r.rejection_reason:''],r.status==='pending'?[['批准',()=>confirmRun('确认批准这条资料修改申请？','admin_review_profile_change',{p_request_id:r.id,p_action:'approve'},'primary')],['拒绝',()=>reasonRun('拒绝资料修改申请','admin_review_profile_change',{p_request_id:r.id,p_action:'reject'},'danger')]]:[])));}
+function renderUsers(){
+ const driverByUser = new Map((dashboard.drivers||[]).map(d=>[d.user_id,d]));
+ return grid((dashboard.users||[]).map(u=>{
+  const buttons=[];
+  if(u.role!=='admin'){
+   if(u.account_status==='pending'){
+    buttons.push(['批准账号',()=>confirmRun('确认批准 '+display(u.username)+' 的账号？','admin_review_account',{p_user_id:u.id,p_action:'approve'},'primary')]);
+    buttons.push(['拒绝账号',()=>reasonRun('拒绝 '+display(u.username)+' 的账号','admin_review_account',{p_user_id:u.id,p_action:'reject'},'danger')]);
+   }
+   if(u.account_status==='approved')buttons.push(['停用账号',()=>confirmRun('确认停用该账号？','admin_review_account',{p_user_id:u.id,p_action:'suspend'},'danger')]);
+   if(u.account_status==='suspended')buttons.push(['恢复账号',()=>confirmRun('确认恢复该账号？','admin_review_account',{p_user_id:u.id,p_action:'restore'},'primary')]);
+  }
+  buttons.push(['修改昵称',()=>{const name=window.prompt('输入新的昵称（2–30 个字符）',u.display_name||'');if(name!==null)run('admin_set_display_name',{p_user_id:u.id,p_display_name:name.trim()});}]);
+  buttons.push(['查看完整档案',()=>{
+   window.CSDCUserDirectory?.setTargetUser(u.id);
+   document.querySelector('#admin-tabs [data-tab="user-directory"]')?.click();
+  }]);
+  const d=driverByUser.get(u.id);
+  const driverLabel=d?.driver_status==='approved'?'已认证':d?.driver_status ? display(statusText[d.driver_status]||d.driver_status) : '网站未登记';
+  const c=card(display(u.display_name||u.username),[
+    '账号审核：'+display(statusText[u.account_status]||u.account_status),
+    '管理员权限：'+(u.role==='admin'?'管理员':'普通用户'),
+    '正式车手资格：'+driverLabel,
+    '注册：'+date(u.created_at),
+    '用户 ID：'+u.id
+  ],buttons);
+  const h=c.querySelector('h3');
+  if(h){
+   const title=el('div','user-overview-person compact');
+   const avatar=el('span','user-overview-avatar',Array.from(u.display_name||u.username||'?')[0]||'?');
+   avatar.setAttribute('aria-hidden','true');
+   const names=el('div','user-overview-person-info');
+   names.append(el('strong','user-overview-nickname',u.display_name||u.username||'未设置昵称'),el('span','user-overview-username','@'+display(u.username)));
+   title.append(avatar,names);h.replaceWith(title);
+   const firstThree = Array.from(c.querySelectorAll(':scope > p')).slice(0,3);
+   for (const line of firstThree) line.remove();
+   const states=el('div','user-overview-pills');
+   const accountState=el('span','user-overview-pill '+(u.account_status==='approved'?'is-ok':u.account_status==='pending'?'is-warn':'is-bad'),'账号：'+display(statusText[u.account_status]||u.account_status));
+   const roleState=el('span','user-overview-pill '+(u.role==='admin'?'is-ok':''),'权限：'+(u.role==='admin'?'管理员':'普通用户'));
+   const driverState=el('span','user-overview-pill '+(d?.driver_status==='approved'?'is-ok':d?.driver_status==='pending'?'is-warn':d?.driver_status==='revoked'?'is-bad':''),'车手：'+driverLabel);
+   states.append(accountState,roleState,driverState);
+   title.insertAdjacentElement('afterend',states);
+  }
+  return c;
+ }));
+}
+function renderChanges(){return grid((dashboard.profile_changes||[]).map(r=>card(display(r.username)+' · '+(r.field_name==='username'?'用户名':'昵称'),['申请：'+display(r.old_value)+' → '+display(r.new_value),'状态：'+display(statusText[r.status])+' · '+date(r.created_at),r.rejection_reason?'原因：'+r.rejection_reason:''],r.status==='pending'?[['批准',()=>confirmRun('确认批准这条资料修改申请？','admin_review_profile_change',{p_request_id:r.id,p_action:'approve'},'primary')],['拒绝',()=>reasonRun('拒绝资料修改申请','admin_review_profile_change',{p_request_id:r.id,p_action:'reject'},'danger')]]:[])));}
 function renderDrivers(){return grid((dashboard.drivers||[]).map(d=>card(display(d.username)+' · '+display(d.display_name),['车手资格：'+display(statusText[d.driver_status]),'账号：'+display(statusText[d.account_status]),'授予时间：'+date(d.approved_at)],d.driver_status==='approved'?[['撤销资格',()=>reasonRun('撤销车手资格','admin_set_driver_status',{p_user_id:d.user_id,p_action:'revoke'},'danger')]]:[])));}
 async function loadEventContext(){eventContext=await rpc('admin_get_event_season_context',{});}
 function eventForm(event=null){
@@ -47,8 +118,70 @@ function renderEvents(){
 }
 function renderRegistrations(){return grid((dashboard.registrations||[]).map(r=>card(display(r.username)+' · '+display(r.event_title),['报名状态：'+display(statusText[r.status]),'申请时间：'+date(r.created_at),r.rejection_reason?'原因：'+r.rejection_reason:''],r.status==='pending'?[['批准',()=>confirmRun('确认批准这条报名？','admin_review_registration',{p_registration_id:r.id,p_action:'approve'},'primary')],['拒绝',()=>reasonRun('拒绝报名','admin_review_registration',{p_registration_id:r.id,p_action:'reject'},'danger')]]:r.status==='approved'?[['取消报名',()=>reasonRun('取消已批准报名','admin_review_registration',{p_registration_id:r.id,p_action:'cancel'},'danger')],['强制删除',()=>window.CSDCForceDelete.open('registration',r.id),'danger']]:[['强制删除',()=>window.CSDCForceDelete.open('registration',r.id),'danger']])));}
 function renderLogs(){return grid((dashboard.admin_logs||[]).map(l=>card(display(l.action),['管理员：'+display(l.admin_username)+' · '+date(l.created_at),'目标用户：'+display(l.target_user_id),'目标赛事：'+display(l.target_event_id),'详情：'+JSON.stringify(l.details||{})])));}
-function render(){const stats=dashboard.stats||{};const metrics=[['用户总数','total_users'],['待审核账号','pending_users'],['资料申请','pending_changes'],['正式车手','approved_drivers'],['待审核报名','pending_registrations']];$('admin-stats').replaceChildren(...metrics.map(([name,key])=>{const n=el('div','admin-stat');n.append(el('strong','',stats[key]??0),el('span','',name));return n;}));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));const sections={users:renderUsers,changes:renderChanges,drivers:renderDrivers,events:renderEvents,registrations:renderRegistrations,logs:renderLogs};if(sections[tab])$('admin-content').replaceChildren(sections[tab]());else $('admin-content').replaceChildren();}
+function render(){const stats=dashboard.stats||{};const metrics=[['用户总数','total_users'],['待审核账号','pending_users'],['资料申请','pending_changes'],['正式车手','approved_drivers'],['待审核报名','pending_registrations']];$('admin-stats').replaceChildren(...metrics.map(([name,key])=>{const n=el('div','admin-stat');n.append(el('strong','',stats[key]??0),el('span','',name));return n;}));updateAdminNavigation();const sections={users:renderUsers,changes:renderChanges,drivers:renderDrivers,events:renderEvents,registrations:renderRegistrations,logs:renderLogs};if(tab==='user-directory'){
+  const root=$('admin-content');
+  if(!window.CSDCUserDirectory){root.replaceChildren(el('p','admin-empty','用户档案总览模块未正确加载，请刷新页面。'));return;}
+  window.CSDCUserDirectory.render(root,client,dashboard).catch(e=>{
+    if(document.querySelector('#admin-tabs [data-tab].active')?.dataset.tab==='user-directory')
+      root.replaceChildren(el('p','admin-empty','用户档案总览加载失败：'+(e.message||'未知错误')+'。请先执行用户档案只读 SQL。'));
+  });
+}else if(tab==='top10-identities'||tab==='top10-claims'){
+  const root=$('admin-content');
+  if(!window.CSDCTop10Admin){root.replaceChildren(el('p','admin-empty','TOP10 管理模块未正确加载，请刷新页面。'));return;}
+  window.CSDCTop10Admin.render(tab,root,client).catch(e=>{
+    if(document.querySelector('#admin-tabs [data-tab].active')?.dataset.tab===tab){
+      root.replaceChildren(el('p','admin-empty','TOP10 管理模块加载失败：'+(e.message||'未知错误')));
+    }
+  });
+}else if(tab==='top10-profiles'){
+  const root=$('admin-content');
+  if(!window.CSDCTop10ProfilesAdmin){root.replaceChildren(el('p','admin-empty','TOP10 设备资料审核模块未正确加载，请刷新页面。'));return;}
+  window.CSDCTop10ProfilesAdmin.render(tab,root,client).catch(e=>{
+    if(document.querySelector('#admin-tabs [data-tab].active')?.dataset.tab===tab){
+      root.replaceChildren(el('p','admin-empty','TOP10 设备资料审核模块加载失败：'+(e.message||'未知错误')));
+    }
+  });
+}else if(tab==='top10-years'){
+  const root=$('admin-content');
+  if(!window.CSDCTop10YearAdmin){root.replaceChildren(el('p','admin-empty','年度 TOP10 管理模块未正确加载，请刷新页面。'));return;}
+  window.CSDCTop10YearAdmin.render(tab,root,client).catch(e=>{
+    if(document.querySelector('#admin-tabs [data-tab].active')?.dataset.tab===tab){
+      root.replaceChildren(el('p','admin-empty','年度 TOP10 管理加载失败：'+(e.message||'未知错误')+'。请确认已执行第五阶段 SQL。'));
+    }
+  });
+}else if(sections[tab])$('admin-content').replaceChildren(sections[tab]());else $('admin-content').replaceChildren();}
 async function load(clear=true){if(clear)msg('');const result=await rpc('admin_get_dashboard_data',{});dashboard=result;if(tab==='events')await loadEventContext();render();}
-async function init(){if(!client){$('admin-loading').textContent='Supabase 配置缺失。';return;}try{const {data,error}=await client.auth.getUser();if(error||!data.user){location.replace('login.html');return;}const isAdmin=await rpc('is_csdc_admin',{});if(!isAdmin){$('admin-loading').textContent='无管理员权限。';return;}await load();$('admin-loading').hidden=true;$('admin-app').hidden=false;document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.tab;if(tab==='events'){loadEventContext().then(()=>render()).catch(e=>msg('读取赛季信息失败：'+e.message,true));}else render();}));$('admin-refresh').addEventListener('click',()=>load().catch(e=>msg(e.message,true)));}catch(e){$('admin-loading').textContent='后台加载失败：'+(e.message||'未知错误');}}
+async function init(){if(!client){$('admin-loading').textContent='Supabase 配置缺失。';return;}try{const {data,error}=await client.auth.getUser();if(error||!data.user){location.replace('login.html');return;}const isAdmin=await rpc('is_csdc_admin',{});if(!isAdmin){$('admin-loading').textContent='无管理员权限。';return;}await load();$('admin-loading').hidden=true;$('admin-app').hidden=false;document.querySelectorAll('#admin-tabs [data-tab]').forEach(b=>b.addEventListener('click',()=>{
+  tab=b.dataset.tab;
+  adminLastTabs[adminTabGroups[tab]]=tab;
+  rememberAdminTab(tab);
+  if(tab==='events'){
+    loadEventContext().then(()=>render()).catch(e=>msg('读取赛季信息失败：'+e.message,true));
+  }else render();
+}));
+// 始终通过点击原有的二级按钮完成切换，让其余模块的监听及
+// 年度 TOP10 未保存草稿的离开确认继续正常工作。
+document.querySelectorAll('#admin-groups [data-admin-group]').forEach(groupButton=>{
+  groupButton.addEventListener('click',()=>{
+    const group=groupButton.dataset.adminGroup;
+    const target=adminLastTabs[group];
+    if(!target)return;
+    if(group===adminTabGroups[tab])return;
+    document.querySelector(`#admin-tabs [data-tab="${target}"]`)?.click();
+  });
+});$('admin-refresh').addEventListener('click',()=>load().catch(e=>msg(e.message,true)));
+// F5 恢复的模块可能由独立 JS 在二级按钮点击后加载。
+// 初始化时主面板 render() 已完成导航高亮，但还没有触发对应模块的点击监听，
+// 会造成“赛季管理”等外部模块高亮却内容空白。用原按钮的点击路径恢复内容。
+// 仅对由独立 JS 监听点击的 4 个模块执行，避免其他模块二次请求。
+if(['seasons','numbers','inspection','inspection-contacts'].includes(tab)){
+  const restoredTab=tab;
+  // defer one event-loop turn to ensure season-admin/inspection-admin have registered
+  // their delegated click listeners after DOMContentLoaded.
+  setTimeout(()=>{
+    if(tab===restoredTab) document.querySelector(`#admin-tabs [data-tab="${restoredTab}"]`)?.click();
+  },0);
+}
+}catch(e){$('admin-loading').textContent='后台加载失败：'+(e.message||'未知错误');}}
 document.addEventListener('DOMContentLoaded',init);
 })();

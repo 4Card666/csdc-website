@@ -44,7 +44,7 @@
       const username = $('resubmit-username').value.trim();
       const displayName = $('resubmit-display-name').value.trim();
       if (!/^[A-Za-z0-9_]{3,24}$/.test(username)) { notify('用户名必须为 3–24 位英文字母、数字或下划线。', true); return; }
-      if (Array.from(displayName).length < 2 || Array.from(displayName).length > 30) { notify('显示名称必须为 2–30 个字符。', true); return; }
+      if (Array.from(displayName).length < 2 || Array.from(displayName).length > 30) { notify('昵称必须为 2–30 个字符。', true); return; }
       const button = form.querySelector('button[type="submit"]');
       button.disabled = true;
       feedback.hidden = true;
@@ -65,7 +65,7 @@
     if (!$('driver-status')) return;
     const config = window.CSDC_SUPABASE_URL && window.CSDC_SUPABASE_PUBLISHABLE_KEY;
     if (!config || !window.supabase?.createClient) { show('driver-status','Supabase 未配置或未加载'); return; }
-    const client = window.supabase.createClient(window.CSDC_SUPABASE_URL, window.CSDC_SUPABASE_PUBLISHABLE_KEY);
+    const client = window.CSDCAuth?.client || window.supabase.createClient(window.CSDC_SUPABASE_URL, window.CSDC_SUPABASE_PUBLISHABLE_KEY);
     const {data:auth,error:authError} = await client.auth.getUser();
     if (authError || !auth?.user) return;
     const user = auth.user;
@@ -84,7 +84,7 @@
       const {data,error} = await client.from('profile_change_requests').select('field_name,old_value,new_value,status,created_at,rejection_reason').eq('user_id',user.id).order('created_at',{ascending:false}).limit(50);
       if(error) { show('change-history','读取失败：'+error.message); return; }
       renderList('change-history',data||[],'暂无资料修改申请',r=>[
-        (r.field_name==='username'?'用户名':'显示名称')+'：'+text(r.old_value)+' → '+text(r.new_value),
+        (r.field_name==='username'?'用户名':'昵称')+'：'+text(r.old_value)+' → '+text(r.new_value),
         '审核状态：'+(statusLabels[r.status]||r.status)+' · 提交时间：'+date(r.created_at),
         ...(r.rejection_reason?['拒绝原因：'+r.rejection_reason]:[])
       ]);
@@ -105,7 +105,7 @@
       ev.preventDefault();
       const field=$('change-field').value, value=$('change-value').value.trim();
       if(field==='username' && !/^[A-Za-z0-9_]{3,24}$/.test(value)) { note('用户名须为 3–24 位英文字母、数字或下划线。',true); return; }
-      if(field==='display_name' && (value.length<2 || value.length>30)) { note('显示名称须为 2–30 个字符。',true); return; }
+      if(field==='display_name' && (value.length<2 || value.length>30)) { note('昵称须为 2–30 个字符。',true); return; }
       const button=$('profile-change-form').querySelector('button[type="submit"]'); button.disabled=true;
       try {
         const {data,error}=await client.rpc('submit_profile_change',{p_field_name:field,p_new_value:value});

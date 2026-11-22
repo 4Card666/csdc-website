@@ -123,5 +123,5 @@
     });
   }
   document.addEventListener('DOMContentLoaded', () => { refreshNav(); initForms(); initResendForm(); initAccount(); });
-  window.CSDCAuth = { configured };
+  window.CSDCAuth = { configured, client };
 })();
