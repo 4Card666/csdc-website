@@ -1,0 +1,62 @@
+/* CSDC Schedule v1.0 - isolated styles for schedule.html */
+.csdc-calendar { --cal-red:#e83a32; --cal-line:rgba(255,255,255,.12); --cal-muted:#9b9da2; --cal-panel:#15171b; }
+.csdc-calendar .cal-section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:18px; flex-wrap:wrap; margin-bottom:25px; }
+.csdc-calendar .cal-section-head h2 { margin:0; }
+.csdc-calendar .cal-current-season { display:flex; align-items:center; gap:11px; padding:11px 16px; border:1px solid rgba(232,58,50,.38); background:rgba(232,58,50,.065); border-radius:8px; }
+.csdc-calendar .cal-current-season .cal-live-dot { display:block; width:7px; height:7px; border-radius:50%; background:#e83a32; box-shadow:0 0 14px rgba(232,58,50,.5); flex:none; }
+.csdc-calendar .cal-current-season .cal-current-caption { display:block; font-size:11px; letter-spacing:.09em; color:var(--cal-muted); }
+.csdc-calendar .cal-current-season strong { display:block; font-size:16px; line-height:1.35; }
+.csdc-calendar .cal-toolbar { margin-bottom:20px; display:flex; align-items:end; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.csdc-calendar .cal-years-label { margin:0 0 8px; font-size:12px; color:var(--cal-muted); letter-spacing:.12em; }
+.csdc-calendar .cal-year-buttons { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+.csdc-calendar .cal-year-button { appearance:none; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.04); border-radius:7px; padding:9px 18px; color:#e6e6e6; cursor:pointer; font-family:inherit; font-size:14px; font-weight:700; line-height:1.3; transition:background .18s,border-color .18s; }
+.csdc-calendar .cal-year-button:hover, .csdc-calendar .cal-year-button[aria-pressed="true"] { background:#bc2825; border-color:#db3a35; color:#fff; }
+.csdc-calendar .cal-year-button:focus-visible, .csdc-calendar .cal-station-toggle:focus-visible, .csdc-calendar .cal-phase-button:focus-visible, .csdc-calendar .cal-link:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+.csdc-calendar .cal-year-hint { color:var(--cal-muted); font-size:13px; }
+.csdc-calendar .cal-station-list { display:grid; gap:12px; }
+.csdc-calendar .cal-station { border:1px solid var(--cal-line); background:var(--cal-panel); transition:border-color .2s,background .2s; overflow:hidden; }
+.csdc-calendar .cal-station:hover { border-color:rgba(255,255,255,.25); }
+.csdc-calendar .cal-station.is-open { border-color:rgba(232,58,50,.72); background:#16171b; }
+.csdc-calendar .cal-station-toggle { width:100%; appearance:none; border:0; padding:20px 22px; background:transparent; color:inherit; cursor:pointer; display:flex; text-align:left; align-items:center; gap:19px; font:inherit; }
+.csdc-calendar .cal-letter { display:flex; justify-content:center; align-items:center; width:65px; height:69px; background:rgba(232,58,50,.09); color:#f04a40; border:1px solid rgba(232,58,50,.25); font:800 32px/1 Arial,sans-serif; flex:none; }
+.csdc-calendar .cal-station-name { display:block; font-weight:750; font-size:19px; line-height:1.45; }
+.csdc-calendar .cal-station-meta { display:block; color:var(--cal-muted); margin-top:7px; font-size:12px; letter-spacing:.025em; }
+.csdc-calendar .cal-station-info { flex:1; min-width:0; }
+.csdc-calendar .cal-station-status { border:1px solid rgba(255,255,255,.17); color:#c9cbce; padding:5px 10px; border-radius:3px; font-size:12px; white-space:nowrap; margin-left:auto; }
+.csdc-calendar .cal-station-chevron { color:#e83a32; font-size:21px; transition:transform .2s; margin-left:7px; }
+.csdc-calendar .is-open .cal-station-chevron { transform:rotate(180deg); }
+.csdc-calendar .cal-panel { border-top:1px solid var(--cal-line); padding:22px 24px 24px; background:rgba(0,0,0,.12); }
+.csdc-calendar .cal-panel-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:19px; }
+.csdc-calendar .cal-panel-heading p { margin:0; font-size:12px; color:var(--cal-muted); letter-spacing:.08em; }
+.csdc-calendar .cal-phase-buttons { display:flex; gap:8px; flex-wrap:wrap; }
+.csdc-calendar .cal-phase-button { appearance:none; cursor:pointer; padding:10px 18px; min-width:104px; border:1px solid rgba(255,255,255,.18); background:#1c1e23; color:#e7e7e7; border-radius:3px; font-family:inherit; font-size:14px; font-weight:700; line-height:1.4; transition:background .18s,border-color .18s; }
+.csdc-calendar .cal-phase-button:hover:not(:disabled) { border-color:#db3a35; }
+.csdc-calendar .cal-phase-button[aria-pressed="true"] { background:#ba2c28; border-color:#ba2c28; color:white; }
+.csdc-calendar .cal-phase-button:disabled { opacity:.38; cursor:not-allowed; }
+.csdc-calendar .cal-phase-info { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; }
+.csdc-calendar .cal-detail { min-width:0; border:1px solid var(--cal-line); background:#101115; padding:15px 17px; }
+.csdc-calendar .cal-detail dt { margin:0 0 7px; font-size:12px; color:var(--cal-muted); }
+.csdc-calendar .cal-detail dd { margin:0; font-size:15px; font-weight:650; line-height:1.5; overflow-wrap:anywhere; }
+.csdc-calendar .cal-detail small { color:var(--cal-muted); font-weight:400; font-size:12px; }
+.csdc-calendar .cal-track { margin-top:13px; border:1px solid var(--cal-line); display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:15px 17px; background:#101115; }
+.csdc-calendar .cal-track-title { color:var(--cal-muted); font-size:12px; margin:0 0 5px; }
+.csdc-calendar .cal-track-note { margin:0; font-size:13px; overflow-wrap:anywhere; }
+.csdc-calendar .cal-link { padding:8px 16px; border:1px solid rgba(232,58,50,.65); color:#fff; background:rgba(232,58,50,.14); font-size:13px; font-weight:650; white-space:nowrap; }
+.csdc-calendar .cal-link:hover { background:#bc2825; }
+.csdc-calendar .cal-empty { border:1px solid var(--cal-line); padding:33px 25px; text-align:center; background:var(--cal-panel); }
+.csdc-calendar .cal-empty h3 { margin:0 0 7px; }
+.csdc-calendar .cal-empty p { color:var(--cal-muted); margin:0; }
+.csdc-calendar .cal-note { color:var(--cal-muted); font-size:12px; line-height:1.8; margin-top:24px; }
+@media(max-width:720px){
+  .csdc-calendar .cal-station-toggle { display:grid; grid-template-columns:47px minmax(0,1fr) 17px; align-items:start; padding:15px; gap:7px 12px; }
+  .csdc-calendar .cal-letter { width:47px; height:51px; font-size:24px; grid-column:1; grid-row:1 / 3; }
+  .csdc-calendar .cal-station-info { grid-column:2; grid-row:1; }
+  .csdc-calendar .cal-station-name { font-size:16px; }
+  .csdc-calendar .cal-station-meta { font-size:11px; }
+  .csdc-calendar .cal-station-status { grid-column:2 / 4; grid-row:2; justify-self:start; margin:0; }
+  .csdc-calendar .cal-station-chevron { grid-column:3; grid-row:1; margin:3px 0 0; }
+  .csdc-calendar .cal-panel { padding:16px; }
+  .csdc-calendar .cal-phase-info { grid-template-columns:1fr; }
+  .csdc-calendar .cal-phase-button { min-width:0; flex:1; }
+}
+@media(prefers-reduced-motion:reduce){.csdc-calendar *{transition:none!important}}
