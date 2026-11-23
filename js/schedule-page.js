@@ -1,5 +1,5 @@
 /*
- * CSDC Schedule v1.0
+ * CSDC Schedule v1.0.1
  * Public presentation only. Existing js/data.js `schedule` remains the single
  * source of truth; no Supabase / registration / admin functions are touched.
  * To change the official current season when a new season begins, edit the
@@ -26,8 +26,20 @@
     return match ? {year:Number(match[1]), round:Number(match[2])} : null;
   }
 
-  function stationLetter(round) {
-    return round >= 1 && round <= 26 ? String.fromCharCode(64 + round) : String(round);
+  function stationLabel(round) {
+    const digits = ['零','一','二','三','四','五','六','七','八','九'];
+    if (round >= 1 && round <= 9) return `第${digits[round]}站`;
+    if (round === 10) return '第十站';
+    if (round >= 11 && round <= 19) return `第十${digits[round % 10]}站`;
+    if (round >= 20 && round <= 99) {
+      const tens = digits[Math.floor(round / 10)] + '十';
+      return `第${tens}${round % 10 ? digits[round % 10] : ''}站`;
+    }
+    return `第${round}站`;
+  }
+
+  function stationBadge(round) {
+    return String(round).padStart(2, '0');
   }
 
   function displayDate(raw) {
@@ -64,7 +76,7 @@
       if (!byYear.has(meta.year)) byYear.set(meta.year,new Map());
       const byRound = byYear.get(meta.year);
       if (!byRound.has(meta.round)) {
-        byRound.set(meta.round,{year:meta.year,round:meta.round,letter:stationLetter(meta.round),name:'',phases:{}});
+        byRound.set(meta.round,{year:meta.year,round:meta.round,label:stationLabel(meta.round),badge:stationBadge(meta.round),name:'',phases:{}});
       }
       const station = byRound.get(meta.round);
       const phase = item.format === '排位赛' ? 'qualifying' : item.format === '追走赛' ? 'tandem' : null;
@@ -134,12 +146,12 @@
     }
     stationHost.innerHTML = stations.map(station => {
       const isOpen = expandedRound===station.round;
-      const name = station.name || `${station.letter}站`;
+      const name = station.name || '赛事详情待公布';
       return `<article class="cal-station${isOpen ? ' is-open' : ''}">
         <button type="button" class="cal-station-toggle" data-round="${station.round}" aria-expanded="${isOpen}" aria-controls="cal-panel-${station.year}-${station.round}">
-          <span class="cal-letter" aria-hidden="true">${escapeHTML(station.letter)}</span>
+          <span class="cal-letter" aria-hidden="true">${escapeHTML(station.badge)}</span>
           <span class="cal-station-info">
-            <span class="cal-station-name">${escapeHTML(station.letter)}站 · ${escapeHTML(name)}</span>
+            <span class="cal-station-name">${escapeHTML(station.label)} · ${escapeHTML(name)}</span>
             <span class="cal-station-meta">ROUND ${String(station.round).padStart(2,'0')} · ${escapeHTML(formatStationDates(station))}</span>
           </span>
           <span class="cal-station-status">${escapeHTML(getStatus(station))}</span>
