@@ -245,7 +245,7 @@ GitHub 仓库：https://github.com/4Card666/csdc-website
 
 2026 年 11 月 8 日 1:10 AM
 
-飛鳥速度做楽場
+飛鳥速度作楽場
 
 </div>
 
