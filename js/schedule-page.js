@@ -1,14 +1,15 @@
 /*
- * CSDC Schedule v1.0.1
- * Public presentation only. Existing js/data.js `schedule` remains the single
- * source of truth; no Supabase / registration / admin functions are touched.
- * To change the official current season when a new season begins, edit the
- * constant below. Year tabs appear automatically for years present in data.js.
+ * CSDC Schedule v1.1
+ * Reads scheduleConfig and schedule from js/data.js.
+ * All public season metadata lives in data.js; does not modify Supabase.
  */
 (() => {
   'use strict';
 
-  const CURRENT_SEASON_YEAR = 2026;
+  const settings = (typeof scheduleConfig !== 'undefined' && scheduleConfig && typeof scheduleConfig === 'object')
+    ? scheduleConfig : { currentSeason: 2026, seasons: {} };
+  const seasonMeta = (settings.seasons && typeof settings.seasons === 'object') ? settings.seasons : {};
+  const configuredCurrent = Number(settings.currentSeason);
   const root = document.getElementById('csdc-calendar');
   if (!root) return;
 
@@ -16,6 +17,8 @@
   const stationHost = document.getElementById('cal-station-list');
   const yearSummary = document.getElementById('cal-year-summary');
   const currentLabel = document.getElementById('cal-current-year');
+  const currentState = document.getElementById('cal-current-state');
+  const currentBadge = document.querySelector('.cal-current-season');
   const records = (typeof schedule !== 'undefined' && Array.isArray(schedule)) ? schedule : [];
 
   const escapeHTML = value => String(value == null ? '' : value).replace(/[&<>"']/g, char =>
@@ -88,11 +91,29 @@
   }
 
   const seasons = buildSeasons();
-  const availableYears = [...seasons.keys()].sort((a,b) => a-b);
-  let activeYear = seasons.has(CURRENT_SEASON_YEAR) ? CURRENT_SEASON_YEAR : (availableYears[availableYears.length-1] || CURRENT_SEASON_YEAR);
+  const availableYears = [...new Set([
+    ...seasons.keys(),
+    ...Object.keys(seasonMeta).map(Number).filter(year => Number.isInteger(year) && year >= 2000 && year <= 2200),
+    ...(Number.isInteger(configuredCurrent) && configuredCurrent >= 2000 && configuredCurrent <= 2200 ? [configuredCurrent] : [])
+  ])].sort((a,b) => a-b);
+  const currentSeasonYear = availableYears.includes(configuredCurrent)
+    ? configuredCurrent : (availableYears[availableYears.length-1] || 2026);
+  let activeYear = currentSeasonYear;
   let expandedRound = null;
   let activePhase = 'qualifying';
-  currentLabel.textContent = `${CURRENT_SEASON_YEAR} 赛季`;
+
+  function seasonStatus(year) {
+    const status = seasonMeta[year] && seasonMeta[year].status;
+    return ['筹备中', '进行中', '已结束'].includes(status) ? status : '待公布';
+  }
+
+  currentLabel.textContent = `${currentSeasonYear} 赛季`;
+  const officialStatus = seasonStatus(currentSeasonYear);
+  if (currentState) {
+    currentState.textContent = officialStatus;
+    currentState.dataset.state = officialStatus;
+  }
+  if (currentBadge) currentBadge.dataset.state = officialStatus;
 
   function getStatus(station) {
     const statuses = [station.phases.qualifying,station.phases.tandem].filter(Boolean).map(x=>x.status).filter(Boolean);
@@ -132,16 +153,18 @@
   }
 
   function renderYears() {
-    yearsHost.innerHTML = availableYears.length ? availableYears.map(year => `
-      <button type="button" class="cal-year-button" data-year="${year}" aria-pressed="${year===activeYear}">${year}</button>`).join('') :
-      `<button type="button" class="cal-year-button" aria-pressed="true" disabled>${CURRENT_SEASON_YEAR}</button>`;
+    yearsHost.innerHTML = availableYears.map(year => `
+      <button type="button" class="cal-year-button" data-year="${year}" aria-label="${year}赛季，${escapeHTML(seasonStatus(year))}" aria-pressed="${year===activeYear}">${year}</button>`).join('');
   }
 
   function renderStations() {
     const stations = seasons.get(activeYear) || [];
-    yearSummary.textContent = `${activeYear} 赛季 · 已公布 ${stations.length} 个分站`;
+    const status = seasonStatus(activeYear);
+    yearSummary.textContent = `${activeYear} 赛季 · ${status} · 已公布 ${stations.length} 个分站`;
     if (!stations.length) {
-      stationHost.innerHTML = '<div class="cal-empty"><h3>该赛季暂无公开赛程</h3><p>待官方确认分站安排后将在这里公布。</p></div>';
+      const notice = (seasonMeta[activeYear] && seasonMeta[activeYear].notice) || '待官方确认分站安排后将在这里公布。';
+      const headline = status === '筹备中' ? `${activeYear} 赛季正在筹备中` : `${activeYear} 赛季赛程暂未公布`;
+      stationHost.innerHTML = `<div class="cal-empty cal-season-placeholder"><span class="cal-empty-kicker">${escapeHTML(status)} · ${activeYear} SEASON</span><h3>${escapeHTML(headline)}</h3><p>${escapeHTML(notice)}</p></div>`;
       return;
     }
     stationHost.innerHTML = stations.map(station => {
@@ -175,7 +198,7 @@
     const target = event.target.closest('button[data-year]');
     if (!target) return;
     const year = Number(target.dataset.year);
-    if (!seasons.has(year)) return;
+    if (!availableYears.includes(year)) return;
     activeYear = year;
     expandedRound = null;
     activePhase = 'qualifying';

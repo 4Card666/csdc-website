@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>赛程安排｜CSDC</title><link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/schedule-page.css?v=1.0">
-  <script src="js/data.js" defer></script><script src="js/app.js" defer></script>
+  <link rel="stylesheet" href="css/schedule-page.css?v=1.1">
+  <script src="js/data.js?v=1.1" defer></script><script src="js/app.js" defer></script>
   <link rel="stylesheet" href="css/auth.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.js" defer></script>
   <script src="js/supabase-config.js" defer></script>
   <script src="js/auth.js" defer></script>
 <link rel="stylesheet" href="css/site-nav.css">
 <script src="js/site-nav.js" defer></script>
-<script src="js/schedule-page.js?v=1.0.1" defer></script>
+<script src="js/schedule-page.js?v=1.1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -26,7 +26,7 @@
     <section class="section page-section csdc-calendar" id="csdc-calendar">
       <div class="cal-section-head">
         <div><p class="eyebrow">SEASON CALENDAR</p><h2>年度赛程</h2></div>
-        <div class="cal-current-season" aria-label="当前赛季"><span class="cal-live-dot" aria-hidden="true"></span><div><span class="cal-current-caption">CURRENT SEASON · 当前赛季</span><strong id="cal-current-year">2026 赛季</strong></div></div>
+        <div class="cal-current-season" aria-label="当前赛季"><span class="cal-live-dot" aria-hidden="true"></span><div><span class="cal-current-caption">CURRENT SEASON · 当前赛季</span><span class="cal-current-main"><strong id="cal-current-year">2026 赛季</strong><span class="cal-current-state" id="cal-current-state">进行中</span></span></div></div>
       </div>
       <div class="cal-toolbar">
         <div><p class="cal-years-label">选择赛季 / SELECT SEASON</p><div class="cal-year-buttons" id="cal-year-buttons" role="group" aria-label="选择查看年份"><button class="cal-year-button" type="button" aria-pressed="true">2026</button></div></div>

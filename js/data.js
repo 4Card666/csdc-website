@@ -103,6 +103,23 @@ const drivers = [
 */
 ];
 
+/*
+ * CSDC 公开赛程统一配置（仅控制赛程安排页，不影响 Supabase 后台赛季和赛事报名）
+ * currentSeason: 当前官方赛季年份，由管理员手动切换；不随自然年份自动变化。
+ * seasons: 各年份的公开展示状态。即使没有任何分站赛程，也会出现该年的选项。
+ * status 只使用："筹备中"、"进行中"、"已结束"。
+ * notice: 本赛季没有公布分站时，展示在空白状态中的文字。
+ *
+ * 后续维护：只需在这里创建新年份/修改赛季状态，并在下方 schedule 追加正式公布的比赛。
+ */
+const scheduleConfig = {
+  currentSeason: 2026,
+  seasons: {
+    2026: { status: "进行中", notice: "请查看已公布的2026赛季分站安排。" },
+    2027: { status: "筹备中", notice: "2027赛季正在筹备中，具体分站、日期及地点将在确认后公布。" }
+  }
+};
+
 const schedule = [
   { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站排位赛", date: "2026.6.20", track: "赛道链接：https://pan.baidu.com/s/1CLtKF3mcDXbIRMRWNVK_7g?pwd=tbuu 提取码: tbuu", format: "排位赛",status: "已结束", statusType: "finished" },
   { round: "2026 ROUND 1", title: "河北涿州飞驰赛车公园站追走赛", date: "2026.6.21", track: "赛道链接：https://pan.baidu.com/s/1CLtKF3mcDXbIRMRWNVK_7g?pwd=tbuu 提取码: tbuu", format: "追走赛", status: "已结束", statusType: "finished" },
