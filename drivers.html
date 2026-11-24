@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>车手列表｜CSDC</title><link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/drivers-search.css?v=1.0">
   <script src="js/data.js" defer></script><script src="js/app.js" defer></script>
+  <script src="js/drivers-search.js?v=1.0" defer></script>
   <link rel="stylesheet" href="css/auth.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.js" defer></script>
   <script src="js/supabase-config.js" defer></script>
@@ -21,7 +23,33 @@
   </header>
   <main>
     <section class="page-hero"><p class="eyebrow">MEET THE DRIVERS</p><h1>车手<span>阵容</span></h1><p>每一位车手，都有自己的路线与风格。</p></section>
-    <section class="section page-section"><div class="section-heading"><div><p class="eyebrow">DRIVER ROSTER</p><h2>参赛车手</h2></div><span class="muted" id="drivers-total"></span></div><div id="drivers-list" class="drivers-list"></div><p class="notice">当前为示例车手资料。修改 <code>js/data.js</code> 即可替换为真实名单。</p></section>
+    <section class="section page-section driver-roster-section" aria-labelledby="drivers-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow">CERTIFIED DRIVER ROSTER</p><h2 id="drivers-heading">已认证车手</h2></div>
+        <span class="muted" id="drivers-total"></span>
+      </div>
+      <div class="driver-search-panel" role="search" aria-label="搜索认证车手">
+        <div class="driver-search-heading">
+          <label for="driver-search-input">搜索车手 / SEARCH DRIVERS</label>
+          <span class="driver-search-hint">支持姓名、车队及车号</span>
+        </div>
+        <div class="driver-search-controls">
+          <div class="driver-search-input-wrap">
+            <svg class="driver-search-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="driver-search-input" type="search" placeholder="输入车手姓名、车队名称或车号…" autocomplete="off" spellcheck="false" aria-describedby="driver-search-summary" />
+          </div>
+          <button class="driver-search-reset" id="driver-search-reset" type="button" hidden>清除搜索</button>
+        </div>
+        <p class="driver-search-summary" id="driver-search-summary" role="status" aria-live="polite">正在加载认证车手名单…</p>
+      </div>
+      <div id="drivers-list" class="drivers-list"></div>
+      <div class="driver-search-empty" id="driver-search-empty" hidden>
+        <strong>未找到符合条件的认证车手</strong>
+        <p>请尝试更换姓名、车队名称或车号关键词。</p>
+        <button type="button" id="driver-search-empty-reset">查看全部车手</button>
+      </div>
+      <p class="notice driver-roster-notice">本页展示 CSDC 赛会确认的认证车手名单，包含尚未注册官网账号的历史车手。是否注册网站账号，不等同于是否取得认证车手资格。名单由赛会维护。</p>
+    </section>
   </main>
   <footer class="site-footer"><a class="footer-brand" href="index.html">CSDC<span> / </span></a><p>神力科莎虚拟漂移赛事 · 非官方社区赛事项目</p><span>© <span class="2022"></span> CSDC</span></footer>
 </body>
