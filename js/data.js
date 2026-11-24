@@ -129,8 +129,16 @@ const schedule = [
   { round: "2026 ROUND 3", title: "浙江宁波四明山站追走赛", date: "2026.10.18", track: "赛道链接: https://pan.baidu.com/s/1R0P0pfTqyIeAH8QOBCxqaA?pwd=s8p4 提取码: s8p4", format: "追走赛", status: "已结束", statusType: "finished" },
   { round: "2026 ROUND 4", title: "海南三亚站排位赛", date: "2026.11.14", track: "赛道链接：https://pan.baidu.com/s/1Whr9xoZao6PjOzj0d1HvDg?pwd=teka", format: "排位赛", status: "已结束", statusType: "finished" },
   { round: "2026 ROUND 4", title: "海南三亚站追走赛", date: "2026.11.15", track: "赛道链接：https://pan.baidu.com/s/1Whr9xoZao6PjOzj0d1HvDg?pwd=teka", format: "追走赛", status: "已结束", statusType: "finished" },
+  { round: "2026 ROUND 5", title: "？", date: "2026.12.11", track: "赛道链接：？", format: "排位赛", status: "即将开始", statusType: "upcoming" },
+  { round: "2026 ROUND 5", title: "？", date: "2026.12.12", track: "赛道链接：？", format: "追走赛", status: "即将开始", statusType: "upcoming" },
   /*
   格式：{ round: "？？？？ ROUND ？", title: "？", date: "？.？.？", track: "？", format: "？？赛", status: "？", statusType: "？" },
+  常用状态对照表
+  比赛状态	 status	  statusType
+  尚未公布	"待公布"	  "upcoming"
+  即将开始	"即将开始"	"upcoming"
+  正在进行	"进行中"	  "ongoing"
+  已经结束	"已结束"	  "finished"
 */
   ];
 
