@@ -15,7 +15,7 @@
 .csdc-calendar .cal-season-placeholder { padding:45px 25px; }
 .csdc-calendar .cal-empty-kicker { display:block; color:#e58b65; font-size:11px; letter-spacing:.14em; margin-bottom:13px; }
 .csdc-calendar .cal-season-placeholder h3 { font-size:20px; margin-bottom:12px; }
-.csdc-calendar .cal-season-placeholder p { line-height:1.8; max-width:680px; margin-inline:auto; }
+.csdc-calendar .cal-empty.cal-season-placeholder p { line-height:1.8; max-width:680px; margin:0 auto; text-align:center; }
 
 .csdc-calendar .cal-toolbar { margin-bottom:20px; display:flex; align-items:end; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 .csdc-calendar .cal-years-label { margin:0 0 8px; font-size:12px; color:var(--cal-muted); letter-spacing:.12em; }
